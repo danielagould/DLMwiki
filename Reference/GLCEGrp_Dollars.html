@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <ul>
+        <li><b>Direct Labour Model Methodology</b></li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Drivers</a>
+            <div class="dropdown-content">
+                <a href="../Driver/Driver_MP.html">Mail processing</a>
+                <a href="../Driver/Driver_CD.html">Collection & Delivery</a>
+                <a href="../Driver/Driver_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Dollars Matrix</a>
+            <div class="dropdown-content">
+                <a href="../Dollars/DollarMatrix_MP.html">Mail processing</a>
+                <a href="../Dollars/DollarMatrix_CD.html">Collection & Delivery</a>
+                <a href="../Dollars/DollarMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Hours Matrix</a>
+            <div class="dropdown-content">
+                <a href="../Hours/HourMatrix_MP.html">Mail processing</a>
+                <a href="../Hours/HourMatrix_CD.html">Collection & Delivery</a>
+                <a href="../Hours/HourMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Reference</a>
+            <div class="dropdown-content">
+                <a href="../Reference/ActGrp.html">Act Group</a>
+                <a href="../Reference/Adjustments.html">Adjustments</a>
+                <a href="../Reference/AllocationRates.html">Allocation Rates</a>
+                <a href="../Reference/Dollars.html">BW Dollars</a>
+                <a href="../Reference/GLCEGrp_Dollars.html">GLCE Group (Dollars)</a>
+                <a href="../Reference/GLCEGrp_Hours.html">GLCE Group (Hours)</a>
+                <a href="../Reference/Hours.html">BW Hours</a>
+                <a href="../Reference/HoursNonHoursSplit.html">Hours v Non Hours Related</a>
+                <a href="../Reference/LYPaidRate.html">LY Paid Rate</a>
+                <a href="../Reference/Plant_NonPlant.html">Plant v Non Plant</a>
+                <a href="../Reference/TimeGroup_Dollars.html">Time Group (Dollars)</a>
+                <a href="../Reference/TimeGroup_Hours.html">Time Group (Hours)</a>
+                <a href="../Reference/WageIncrease.html">Wage Increase</a>
+            </div>
+        </li>
+    </ul>
+    <header><b>GLCE Group (Dollars)</b></header>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+    <p>
+        The GLCE Group is the hour type for each hour work, whether Full Time (FT), Part Time (PT), Temporary (TMP) or Overtime (OT).
+        <br>
+        <br>
+        Each entry in the Dollars raw data input (see <a href="Dollars.html">Dollars</a>) has a cost element code. These cost element codes 
+        exist in a hierachy that the DLM uses to map each entry.
+        <br>
+        <img src="CostElementHierarchy.PNG" alt="Time Type Codes and their hierarchy in BW">
+        <br>
+        <br>
+        The DLM extracts this hierarchy on a periodic basis creates a list of parent and child nodes, effectively mapping the lowest Cost element
+        Codes to the highest Cost Element Groups (e.g. Labour Excl Benefits). This is list is stored in the tblHierarchies table (DLM_Inputs).
+        <br>
+        <br>
+        Using the parent/child list and the <i>Cost Element to GLCEGrp</i> table tblGLCEGrp (see below) the DLM maps all cost elemets to a GLCE Group.
+        <br>
+        <br>
+        For the dollars the DLM uses additional GLCE Groups as compared with the <a href="GLCEGrp_Hours.html">hours</a> mapping. This is because the 
+        dollars are separated into <a href="HoursNonHoursSplit.html">Hours Related vs Non Hours Related</a>) (although all are Labour Related).
+        <br>
+        <br>
+        <b>Hours Related</b> are mapped to FT, PT, TMP and OT.
+        <br>
+        <br>
+        <b>Non Hours Related</b> are mapped to HH Bonus, NonHrs, OthAllw, OthLab, Rest&BG and Route
+        <br>
+        <br>
+        <i>The final complete mapping is found below the tblGLCEGrp table</i>
+    </p>
+    <TABLE>
+        <caption>tblGLCEGrp</caption>
+        <tr>
+            <th>Account Code</th>
+            <th>Account Desc</th>
+            <th>GLCEGrp</th>
+        </tr>
+        <tr>
+            <td>CEN900</td>
+            <td>Full Time Indeterminate</td>
+            <td>FT</td>
+        </tr>
+        <tr>
+            <td>CEN901</td>
+            <td>Part Time Indeterminate</td>
+            <td>PT</td>
+        </tr>
+        <tr>
+            <td>CEN9015</td>
+            <td>RSMC</td>
+            <td>NonHrs</td>
+        </tr>
+        <tr>
+            <td>CEN902</td>
+            <td>Term/Temporary</td>
+            <td>Tmp</td>
+        </tr>
+        <tr>
+            <td>CEN903</td>
+            <td>Overtime</td>
+            <td>OT</td>
+        </tr>
+        <tr>
+            <td>CEN904</td>
+            <td>Non Hours Payments</td>
+            <td>NonHrs</td>
+        </tr>
+        <tr>
+            <td>CEN9060</td>
+            <td>Householder Bonus</td>
+            <td>HH Bonus</td>
+        </tr>
+        <tr>
+            <td>CEN9061</td>
+            <td>Shift Differential</td>
+            <td>OthAllw</td>
+        </tr>
+        <tr>
+            <td>CEN9062</td>
+            <td>Weekend Premium</td>
+            <td>OthAllw</td>
+        </tr>
+        <tr>
+            <td>CEN9063</td>
+            <td>Rest Period</td>
+            <td>Rest&BG</td>
+        </tr>
+        <tr>
+            <td>CEN9064</td>
+            <td>Boot & Glove</td>
+            <td>Rest&BG</td>
+        </tr>
+        <tr>
+            <td>906500</td>
+            <td>Allowances Supplement Temporary</td>
+            <td>OthAllw</td>
+        </tr>
+        <tr>
+            <td>906501</td>
+            <td>Allowances Bilingual Bonus</td>
+            <td>OthAllw</td>
+        </tr>
+        <tr>
+            <td>906502</td>
+            <td>Allowances Route</td>
+            <td>Route</td>
+        </tr>
+        <tr>
+            <td>906503</td>
+            <td>Allowances Isolation & Related</td>
+            <td>OthAllw</td>
+        </tr>
+        <tr>
+            <td>906504</td>
+            <td>Allowances Meal</td>
+            <td>OthAllw</td>
+        </tr>
+        <tr>
+            <td>906505</td>
+            <td>Allowances Salary</td>
+            <td>OthAllw</td>
+        </tr>
+        <tr>
+            <td>906506</td>
+            <td>Allowances Lease</td>
+            <td>OthAllw</td>
+        </tr>
+        <tr>
+            <td>906507</td>
+            <td>Allowances Other</td>
+            <td>OthAllw</td>
+        </tr>
+        <tr>
+            <td>SCEN906</td>
+            <td>IO to Cost Centre</td>
+            <td>OthAllw</td>
+        </tr>
+        <tr>
+            <td>CEN907</td>
+            <td>OthLab</td>
+            <td>OthLab</td>
+        </tr>    
+        <tr>
+            <td>904220</td>
+            <td>STDP</td>
+            <td>STDP</td>
+        </tr>                     
+    </Table>
+    <br>
+    <TABLE>
+        <caption>Complete Cost Element to GLCEGrp Mapping</caption>
+        <tr>
+        <th>Cost Element Name</th>
+        <th>Cost Element Code</th>
+        <th>Description</th>
+        <th>GLCEGrp</th>
+        </tr>
+        <tr>
+        <td>Allowances Supplement Temporary</td>
+        <td>906500</td>
+        <td>Allowances Supplement Temporary</td>
+        <td>OthAllw</td>
+        </tr>
+        <tr>
+        <td>Allowances Bilingual Bonus</td>
+        <td>906501</td>
+        <td>Allowances Bilingual Bonus</td>
+        <td>OthAllw</td>
+        </tr>
+        <tr>
+        <td>Allowances Route</td>
+        <td>906502</td>
+        <td>Allowances Route</td>
+        <td>Route</td>
+        </tr>
+        <tr>
+        <td>Allowances Isolation & Related</td>
+        <td>906503</td>
+        <td>Allowances Isolation & Related</td>
+        <td>OthAllw</td>
+        </tr>
+        <tr>
+        <td>Allowances Meal</td>
+        <td>906504</td>
+        <td>Allowances Meal</td>
+        <td>OthAllw</td>
+        </tr>
+        <tr>
+        <td>Allowances Salary</td>
+        <td>906505</td>
+        <td>Allowances Salary</td>
+        <td>OthAllw</td>
+        </tr>
+        <tr>
+        <td>Allowances Lease</td>
+        <td>906506</td>
+        <td>Allowances Lease</td>
+        <td>OthAllw</td>
+        </tr>
+        <tr>
+        <td>Allowances Other</td>
+        <td>906507</td>
+        <td>Allowances Other</td>
+        <td>OthAllw</td>
+        </tr>
+        <tr>
+        <td>IO to CC Full Time</td>
+        <td>510900</td>
+        <td>Full Time Indeterminate</td>
+        <td>FT</td>
+        </tr>
+        <tr>
+        <td>Salaries Full Time Indeterminate</td>
+        <td>900000</td>
+        <td>Full Time Indeterminate</td>
+        <td>FT</td>
+        </tr>
+        <tr>
+        <td>Salaries Lump Sum in Lieu of Salary Rev</td>
+        <td>900001</td>
+        <td>Full Time Indeterminate</td>
+        <td>FT</td>
+        </tr>
+        <tr>
+        <td>Salaries Full Time  Vacation Pay</td>
+        <td>900002</td>
+        <td>Full Time Indeterminate</td>
+        <td>FT</td>
+        </tr>
+        <tr>
+        <td>Salaries Full Time Indeterminate Accrual</td>
+        <td>900003</td>
+        <td>Full Time Indeterminate</td>
+        <td>FT</td>
+        </tr>
+        <tr>
+        <td>Salaries Clerical</td>
+        <td>900004</td>
+        <td>Full Time Indeterminate</td>
+        <td>FT</td>
+        </tr>
+        <tr>
+        <td>Salaries Operations</td>
+        <td>900005</td>
+        <td>Full Time Indeterminate</td>
+        <td>FT</td>
+        </tr>
+        <tr>
+        <td>Salaries: Officer</td>
+        <td>900006</td>
+        <td>Full Time Indeterminate</td>
+        <td>FT</td>
+        </tr>
+        <tr>
+        <td>Salaries: Professional</td>
+        <td>900007</td>
+        <td>Full Time Indeterminate</td>
+        <td>FT</td>
+        </tr>
+        <tr>
+        <td>Overtime Clerical Salaries</td>
+        <td>900008</td>
+        <td>Full Time Indeterminate</td>
+        <td>FT</td>
+        </tr>
+        <tr>
+        <td>Overtime Operations Salaries</td>
+        <td>900009</td>
+        <td>Full Time Indeterminate</td>
+        <td>FT</td>
+        </tr>
+        <tr>
+        <td>Salaries: Supervisory and Management</td>
+        <td>900010</td>
+        <td>Full Time Indeterminate</td>
+        <td>FT</td>
+        </tr>
+        <tr>
+        <td>Salaries Full Time Ind Leave Accrual</td>
+        <td>900011</td>
+        <td>Full Time Indeterminate</td>
+        <td>FT</td>
+        </tr>
+        <tr>
+        <td>STD Full Time Regular</td>
+        <td>900050</td>
+        <td>Full Time Indeterminate</td>
+        <td>FT</td>
+        </tr>
+        <tr>
+        <td>IOD-FT</td>
+        <td>900051</td>
+        <td>Full Time Indeterminate</td>
+        <td>FT</td>
+        </tr>
+        <tr>
+        <td>Bonus Office Staff</td>
+        <td>900101</td>
+        <td>Full Time Indeterminate</td>
+        <td>FT</td>
+        </tr>
+        <tr>
+        <td>Christmas Bonus</td>
+        <td>900102</td>
+        <td>Full Time Indeterminate</td>
+        <td>FT</td>
+        </tr>
+        <tr>
+        <td>Management Incentive Award</td>
+        <td>900103</td>
+        <td>Full Time Indeterminate</td>
+        <td>FT</td>
+        </tr>
+        <tr>
+        <td>Sales Professional Bonus</td>
+        <td>900104</td>
+        <td>Full Time Indeterminate</td>
+        <td>FT</td>
+        </tr>
+        <tr>
+        <td>Discretionary Honourarium</td>
+        <td>900105</td>
+        <td>Full Time Indeterminate</td>
+        <td>FT</td>
+        </tr>
+        <tr>
+        <td>Courier Sales Bonus</td>
+        <td>900106</td>
+        <td>Full Time Indeterminate</td>
+        <td>FT</td>
+        </tr>
+        <tr>
+        <td>IO to CC Part Time</td>
+        <td>510901</td>
+        <td>Part Time Indeterminate</td>
+        <td>PT</td>
+        </tr>
+        <tr>
+        <td>Salaries Part Time Indeterminate</td>
+        <td>901000</td>
+        <td>Part Time Indeterminate</td>
+        <td>PT</td>
+        </tr>
+        <tr>
+        <td>Salaries Part Time Indeterminate Vac Pay</td>
+        <td>901001</td>
+        <td>Part Time Indeterminate</td>
+        <td>PT</td>
+        </tr>
+        <tr>
+        <td>Salaries Part Time Indeterminate Accrual</td>
+        <td>901002</td>
+        <td>Part Time Indeterminate</td>
+        <td>PT</td>
+        </tr>
+        <tr>
+        <td>Salaries Part Time Ind CPAA Accrual</td>
+        <td>901003</td>
+        <td>Part Time Indeterminate</td>
+        <td>PT</td>
+        </tr>
+        <tr>
+        <td>STD Part Time Regular</td>
+        <td>901050</td>
+        <td>Part Time Indeterminate</td>
+        <td>PT</td>
+        </tr>
+        <tr>
+        <td>IOD-PT</td>
+        <td>901051</td>
+        <td>Part Time Indeterminate</td>
+        <td>PT</td>
+        </tr>
+        <tr>
+        <td>IO to CC RSMC</td>
+        <td>510915</td>
+        <td>RSMC</td>
+        <td>NonHrs</td>
+        </tr>
+        <tr>
+        <td>RSMC Labour</td>
+        <td>901500</td>
+        <td>RSMC</td>
+        <td>NonHrs</td>
+        </tr>
+        <tr>
+        <td>RSMC Vacation Pay Accrual</td>
+        <td>901501</td>
+        <td>RSMC</td>
+        <td>NonHrs</td>
+        </tr>
+        <tr>
+        <td>RSMC Labour Accrual</td>
+        <td>901502</td>
+        <td>RSMC</td>
+        <td>NonHrs</td>
+        </tr>
+        <tr>
+        <td>RSMC Labour Relief</td>
+        <td>901503</td>
+        <td>RSMC</td>
+        <td>NonHrs</td>
+        </tr>
+        <tr>
+        <td>RSMC Vacation Pay Accrual</td>
+        <td>901504</td>
+        <td>RSMC</td>
+        <td>NonHrs</td>
+        </tr>
+        <tr>
+        <td>STD RSMC</td>
+        <td>901550</td>
+        <td>RSMC</td>
+        <td>NonHrs</td>
+        </tr>
+        <tr>
+        <td>IOD-RSMC</td>
+        <td>901551</td>
+        <td>RSMC</td>
+        <td>NonHrs</td>
+        </tr>
+        <tr>
+        <td>IO to CC Term/Temp</td>
+        <td>510902</td>
+        <td>Term/Temporary</td>
+        <td>Tmp</td>
+        </tr>
+        <tr>
+        <td>Salaries Full Time Term</td>
+        <td>902000</td>
+        <td>Term/Temporary</td>
+        <td>Tmp</td>
+        </tr>
+        <tr>
+        <td>Salaries Full Time Term Vacation Pay</td>
+        <td>902001</td>
+        <td>Term/Temporary</td>
+        <td>Tmp</td>
+        </tr>
+        <tr>
+        <td>Salaries Full Time Term Accrual</td>
+        <td>902002</td>
+        <td>Term/Temporary</td>
+        <td>Tmp</td>
+        </tr>
+        <tr>
+        <td>STD Full Time Term</td>
+        <td>902050</td>
+        <td>Term/Temporary</td>
+        <td>Tmp</td>
+        </tr>
+        <tr>
+        <td>IOD-Full Time Term</td>
+        <td>902051</td>
+        <td>Term/Temporary</td>
+        <td>Tmp</td>
+        </tr>
+        <tr>
+        <td>Salaries Part Time Term</td>
+        <td>902300</td>
+        <td>Term/Temporary</td>
+        <td>Tmp</td>
+        </tr>
+        <tr>
+        <td>Salaries Part Time Term Vacation Pay</td>
+        <td>902301</td>
+        <td>Term/Temporary</td>
+        <td>Tmp</td>
+        </tr>
+        <tr>
+        <td>Salaries Part Time Term Accrual</td>
+        <td>902302</td>
+        <td>Term/Temporary</td>
+        <td>Tmp</td>
+        </tr>
+        <tr>
+        <td>Salaries Part Time Term CPAA  Accrual</td>
+        <td>902303</td>
+        <td>Term/Temporary</td>
+        <td>Tmp</td>
+        </tr>
+        <tr>
+        <td>STD Part Time Term</td>
+        <td>902350</td>
+        <td>Term/Temporary</td>
+        <td>Tmp</td>
+        </tr>
+        <tr>
+        <td>IOD-Part Time Term</td>
+        <td>902351</td>
+        <td>Term/Temporary</td>
+        <td>Tmp</td>
+        </tr>
+        <tr>
+        <td>Salaries Temporary</td>
+        <td>902600</td>
+        <td>Term/Temporary</td>
+        <td>Tmp</td>
+        </tr>
+        <tr>
+        <td>Salaries Temporary Vacation Pay</td>
+        <td>902601</td>
+        <td>Term/Temporary</td>
+        <td>Tmp</td>
+        </tr>
+        <tr>
+        <td>Salaries Temporary Accrual</td>
+        <td>902602</td>
+        <td>Term/Temporary</td>
+        <td>Tmp</td>
+        </tr>
+        <tr>
+        <td>STD Temporary</td>
+        <td>902650</td>
+        <td>Term/Temporary</td>
+        <td>Tmp</td>
+        </tr>
+        <tr>
+        <td>IOD-Temporary</td>
+        <td>902651</td>
+        <td>Term/Temporary</td>
+        <td>Tmp</td>
+        </tr>
+        <tr>
+        <td>IO to CC Overtime</td>
+        <td>510903</td>
+        <td>Overtime</td>
+        <td>OT</td>
+        </tr>
+        <tr>
+        <td>Salaries Overtime Full Time 1.5</td>
+        <td>903000</td>
+        <td>Overtime</td>
+        <td>OT</td>
+        </tr>
+        <tr>
+        <td>Salaries Overtime Part Time 1.5</td>
+        <td>903001</td>
+        <td>Overtime</td>
+        <td>OT</td>
+        </tr>
+        <tr>
+        <td>Salaries Overtime Temp 1.5</td>
+        <td>903002</td>
+        <td>Overtime</td>
+        <td>OT</td>
+        </tr>
+        <tr>
+        <td>Salaries Overtime Accrual 1.5</td>
+        <td>903003</td>
+        <td>Overtime</td>
+        <td>OT</td>
+        </tr>
+        <tr>
+        <td>903599</td>
+        <td>903300</td>
+        <td>Overtime</td>
+        <td>OT</td>
+        </tr>
+        <tr>
+        <td>Salaries Overtime Full Time 2.0</td>
+        <td>903334</td>
+        <td>Overtime</td>
+        <td>OT</td>
+        </tr>
+        <tr>
+        <td>Salaries Overtime Part Time 2.0</td>
+        <td>903335</td>
+        <td>Overtime</td>
+        <td>OT</td>
+        </tr>
+        <tr>
+        <td>Salaries Overtime Temp 2.0</td>
+        <td>903336</td>
+        <td>Overtime</td>
+        <td>OT</td>
+        </tr>
+        <tr>
+        <td>Salaries Overtime Accrual 2.0</td>
+        <td>903337</td>
+        <td>Overtime</td>
+        <td>OT</td>
+        </tr>
+        <tr>
+        <td>903999</td>
+        <td>903600</td>
+        <td>Overtime</td>
+        <td>OT</td>
+        </tr>
+        <tr>
+        <td>Salaries Overtime Full Time Other Rates</td>
+        <td>903667</td>
+        <td>Overtime</td>
+        <td>OT</td>
+        </tr>
+        <tr>
+        <td>Salaries Overtime Part Time Other Rates</td>
+        <td>903668</td>
+        <td>Overtime</td>
+        <td>OT</td>
+        </tr>
+        <tr>
+        <td>Salaries Overtime Temp Other Rates</td>
+        <td>903669</td>
+        <td>Overtime</td>
+        <td>OT</td>
+        </tr>
+        <tr>
+        <td>Salaries Overtime Accrual Other Rates</td>
+        <td>903670</td>
+        <td>Overtime</td>
+        <td>OT</td>
+        </tr>
+        <tr>
+        <td>IO to CC Non Hour Labour</td>
+        <td>510904</td>
+        <td>Non Hours Payments</td>
+        <td>NonHrs</td>
+        </tr>
+        <tr>
+        <td>Salaries Full Time Retro Prior Years</td>
+        <td>904000</td>
+        <td>Non Hours Payments</td>
+        <td>NonHrs</td>
+        </tr>
+        <tr>
+        <td>Salaries Part Time Retro Prior Years</td>
+        <td>904001</td>
+        <td>Non Hours Payments</td>
+        <td>NonHrs</td>
+        </tr>
+        <tr>
+        <td>Salaries Full Time Non Hour</td>
+        <td>904200</td>
+        <td>Non Hours Payments</td>
+        <td>NonHrs</td>
+        </tr>
+        <tr>
+        <td>STDP Personal Days Payout</td>
+        <td>904220</td>
+        <td>Non Hours Payments</td>
+        <td>STDP</td>
+        </tr>
+        <tr>
+        <td>Allowances Householder Bonus</td>
+        <td>906000</td>
+        <td>Householder Bonus</td>
+        <td>HH Bonus</td>
+        </tr>
+        <tr>
+        <td>Allowances Householder Bonus Accrual</td>
+        <td>906001</td>
+        <td>Householder Bonus</td>
+        <td>HH Bonus</td>
+        </tr>
+        <tr>
+        <td>Allowances Shift Differential Full Time</td>
+        <td>906100</td>
+        <td>Shift Differential</td>
+        <td>OthAllw</td>
+        </tr>
+        <tr>
+        <td>Allowances Shift Differential Part Time</td>
+        <td>906101</td>
+        <td>Shift Differential</td>
+        <td>OthAllw</td>
+        </tr>
+        <tr>
+        <td>Allowances Shift Differential FT Accrual</td>
+        <td>906102</td>
+        <td>Shift Differential</td>
+        <td>OthAllw</td>
+        </tr>
+        <tr>
+        <td>Allowances Shift Differential PT Accrual</td>
+        <td>906103</td>
+        <td>Shift Differential</td>
+        <td>OthAllw</td>
+        </tr>
+        <tr>
+        <td>Allowances Weekend Premium Full Time</td>
+        <td>906200</td>
+        <td>Weekend Premium</td>
+        <td>OthAllw</td>
+        </tr>
+        <tr>
+        <td>Allowances Weekend Premium Part Time</td>
+        <td>906201</td>
+        <td>Weekend Premium</td>
+        <td>OthAllw</td>
+        </tr>
+        <tr>
+        <td>Allowances Weekend Premium FT Accrual</td>
+        <td>906202</td>
+        <td>Weekend Premium</td>
+        <td>OthAllw</td>
+        </tr>
+        <tr>
+        <td>Allowances Weekend Premium PT Accrual</td>
+        <td>906203</td>
+        <td>Weekend Premium</td>
+        <td>OthAllw</td>
+        </tr>
+        <tr>
+        <td>Allowances Rest Period</td>
+        <td>906300</td>
+        <td>Rest Period</td>
+        <td>Rest&BG</td>
+        </tr>
+        <tr>
+        <td>Allowances Rest Period Settlement to B/S</td>
+        <td>906301</td>
+        <td>Rest Period</td>
+        <td>Rest&BG</td>
+        </tr>
+        <tr>
+        <td>Allowances Boot and Glove</td>
+        <td>906400</td>
+        <td>Boot & Glove</td>
+        <td>Rest&BG</td>
+        </tr>
+        <tr>
+        <td>Allowances Boot and Glove Prepaid</td>
+        <td>906401</td>
+        <td>Boot & Glove</td>
+        <td>Rest&BG</td>
+        </tr>
+        <tr>
+        <td>IO to CC Other Labour</td>
+        <td>510907</td>
+        <td>OthLab</td>
+        <td>OthLab</td>
+        </tr>
+        <tr>
+        <td>Grievances</td>
+        <td>907000</td>
+        <td>OthLab</td>
+        <td>OthLab</td>
+        </tr>
+        <tr>
+        <td>Grievances Interest</td>
+        <td>907001</td>
+        <td>OthLab</td>
+        <td>OthLab</td>
+        </tr>
+        <tr>
+        <td>Grievances Retro</td>
+        <td>907002</td>
+        <td>OthLab</td>
+        <td>OthLab</td>
+        </tr>
+        <tr>
+        <td>Grievances Retro Contra</td>
+        <td>907003</td>
+        <td>OthLab</td>
+        <td>OthLab</td>
+        </tr>
+        <tr>
+        <td>907399</td>
+        <td>907200</td>
+        <td>OthLab</td>
+        <td>OthLab</td>
+        </tr>
+        <tr>
+        <td>907599</td>
+        <td>907400</td>
+        <td>OthLab</td>
+        <td>OthLab</td>
+        </tr>
+        <tr>
+        <td>907799</td>
+        <td>907600</td>
+        <td>OthLab</td>
+        <td>OthLab</td>
+        </tr>
+        <tr>
+        <td>Severance</td>
+        <td>907601</td>
+        <td>OthLab</td>
+        <td>OthLab</td>
+        </tr>
+        <tr>
+        <td>907899</td>
+        <td>907800</td>
+        <td>OthLab</td>
+        <td>OthLab</td>
+        </tr>
+        <tr>
+        <td>909999</td>
+        <td>907900</td>
+        <td>OthLab</td>
+        <td>OthLab</td>
+        </tr>
+        <tr>
+        <td>Courier Wages</td>
+        <td>908001</td>
+        <td>OthLab</td>
+        <td>OthLab</td>
+        </tr>
+        <tr>
+        <td>Linehaul Wages</td>
+        <td>908002</td>
+        <td>OthLab</td>
+        <td>OthLab</td>
+        </tr>
+        <tr>
+        <td>Marker Wages</td>
+        <td>908003</td>
+        <td>OthLab</td>
+        <td>OthLab</td>
+        </tr>
+        <tr>
+        <td>Sorter Wages</td>
+        <td>908004</td>
+        <td>OthLab</td>
+        <td>OthLab</td>
+        </tr>
+        <tr>
+        <td>Temporary Help - Dock</td>
+        <td>908021</td>
+        <td>OthLab</td>
+        <td>OthLab</td>
+        </tr>
+        <tr>
+        <td>Overtime Courier</td>
+        <td>908101</td>
+        <td>OthLab</td>
+        <td>OthLab</td>
+        </tr>
+        <tr>
+        <td>Overtime Linehaul</td>
+        <td>908102</td>
+        <td>OthLab</td>
+        <td>OthLab</td>
+        </tr>
+        <tr>
+        <td>Overtime Marker</td>
+        <td>908103</td>
+        <td>OthLab</td>
+        <td>OthLab</td>
+        </tr>
+        <tr>
+        <td>Overtime Sorter</td>
+        <td>908104</td>
+        <td>OthLab</td>
+        <td>OthLab</td>
+        </tr>
+        <tr>
+        <td>Increment</td>
+        <td>908201</td>
+        <td>OthLab</td>
+        <td>OthLab</td>
+        </tr>
+        <tr>
+        <td>Longevity</td>
+        <td>908202</td>
+        <td>OthLab</td>
+        <td>OthLab</td>
+        </tr>
+        <tr>
+        <td>Light Duty Wages</td>
+        <td>908301</td>
+        <td>OthLab</td>
+        <td>OthLab</td>
+        </tr>
+        <tr>
+        <td>IO to CC Allowances</td>
+        <td>510906</td>
+        <td>IO to Cost Centre</td>
+        <td>OthAllw</td>
+        </tr>                      
+    </Table>
+</body>
+</html>

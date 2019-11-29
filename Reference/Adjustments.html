@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <ul>
+        <li><b>Direct Labour Model Methodology</b></li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Drivers</a>
+            <div class="dropdown-content">
+                <a href="../Driver/Driver_MP.html">Mail processing</a>
+                <a href="../Driver/Driver_CD.html">Collection & Delivery</a>
+                <a href="../Driver/Driver_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Dollars Matrix</a>
+            <div class="dropdown-content">
+                <a href="../Dollars/DollarMatrix_MP.html">Mail processing</a>
+                <a href="../Dollars/DollarMatrix_CD.html">Collection & Delivery</a>
+                <a href="../Dollars/DollarMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Hours Matrix</a>
+            <div class="dropdown-content">
+                <a href="../Hours/HourMatrix_MP.html">Mail processing</a>
+                <a href="../Hours/HourMatrix_CD.html">Collection & Delivery</a>
+                <a href="../Hours/HourMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Reference</a>
+            <div class="dropdown-content">
+                <a href="../Reference/ActGrp.html">Act Group</a>
+                <a href="../Reference/Adjustments.html">Adjustments</a>
+                <a href="../Reference/AllocationRates.html">Allocation Rates</a>
+                <a href="../Reference/Dollars.html">BW Dollars</a>
+                <a href="../Reference/GLCEGrp_Dollars.html">GLCE Group (Dollars)</a>
+                <a href="../Reference/GLCEGrp_Hours.html">GLCE Group (Hours)</a>
+                <a href="../Reference/Hours.html">BW Hours</a>
+                <a href="../Reference/HoursNonHoursSplit.html">Hours v Non Hours Related</a>
+                <a href="../Reference/LYPaidRate.html">LY Paid Rate</a>
+                <a href="../Reference/Plant_NonPlant.html">Plant v Non Plant</a>
+                <a href="../Reference/TimeGroup_Dollars.html">Time Group (Dollars)</a>
+                <a href="../Reference/TimeGroup_Hours.html">Time Group (Hours)</a>
+                <a href="../Reference/WageIncrease.html">Wage Increase</a>
+            </div>
+        </li>
+    </ul>
+    <header><b>Adjustments</b></header>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+        <p>
+                Adjustments are entered into the T110 Excel Workbook by the regional advisors and are used by the DLM to attribute impacts not presented in BW. 
+                These include one time transfers of hours or dollars, restructures, day count adjustments and other idiosyncratic impacts.
+                <br>
+                <br>
+                The T110 contains both an hours tab and dollars tab, both of which are used by the DLM.
+                <br>
+                <br>
+                The T110 also uses the same <a href="ActGrp.html">Act Sub Group</a>, 
+                <a href="TimeGroup_Hours.html">Time Group</a> and 
+                <a href="GLCEGrp_Hours.html">GLCE Group</a> as the DLM, so no mapping is necessary when it is used by the DLM.
+                <br>
+                <br>
+                The T110 uses a series of Drivers and SubDrivers, which the DLM uses to assign and map the impacts (see below).
+                <br>
+                <br>
+                The adjustments are filterable by:
+                <ul class="filterlist">
+                        <li class="filterlist"><i>Hours</i></li>
+                        <li class="filterlist"><i>Dollars</i></li>
+                        <li class="filterlist"><i>ActSubGroup</i></li>
+                        <li class="filterlist"><i>Plant</i></li>
+                        <li class="filterlist"><i>Driver</i></li>
+                        <li class="filterlist"><i>SubDriver</i></li>
+                </ul>           
+        </p>
+        
+        <TABLE>	
+                <caption>T110 Drivers and SubDrivers</caption>
+                <tr>	
+                        <th>	<b>Driver</b>	</th>	
+                        <th>	<b>SubDriver</b>	</th>	
+                </tr>
+                <tr>	
+                        <td>	CI	</td>	
+                        <td>	Letter Carrier Plan A Restructures	</td>		
+                </tr>
+                <tr>	
+                        <td>	CI	</td>	
+                        <td>	MSC Restructures	</td>		
+                </tr>
+                <tr>	
+                        <td>	CI	</td>	
+                        <td>	Neighbourhood Mail Prep-Time	</td>		
+                </tr>
+                <tr>	
+                        <td>	Days	</td>	
+                        <td>	Days Adjustments	</td>		
+                </tr>
+                <tr>	
+                        <td>	Growth	</td>	
+                        <td>	LC POC Growth	</td>      	
+                </tr>                 
+                <tr>	
+                        <td>	Inv	</td>	
+                        <td>	Local Continuous Improvement	</td>		
+                </tr>
+                <tr>	
+                        <td>	Inv	</td>	
+                        <td>	Retail Initiatives	</td>		
+                </tr>
+                <tr>	
+                        <td>	Inv	</td>	
+                        <td>	Seq Ext Rest	</td>		
+                </tr>
+                <tr>	
+                        <td>	Inv	</td>	
+                        <td>	Seq-Motor Restructures	</td>		
+                </tr>
+                <tr>	
+                        <td>	NonRecur	</td>	
+                        <td>	Timing- Hours Related	</td>		
+                </tr>
+                <tr>	
+                        <td>	Growth	</td>	
+                        <td>	Transfers (between Ops regions/functions - zero at the Ops level)	</td>   	
+                </tr>
+        </table>
+</body>
+</html> 

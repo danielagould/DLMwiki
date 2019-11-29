@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <ul>
+        <li><b>Direct Labour Model Methodology</b></li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Drivers</a>
+            <div class="dropdown-content">
+                <a href="../Driver/Driver_MP.html">Mail processing</a>
+                <a href="../Driver/Driver_CD.html">Collection & Delivery</a>
+                <a href="../Driver/Driver_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Dollars Matrix</a>
+            <div class="dropdown-content">
+                <a href="../Dollars/DollarMatrix_MP.html">Mail processing</a>
+                <a href="../Dollars/DollarMatrix_CD.html">Collection & Delivery</a>
+                <a href="../Dollars/DollarMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Hours Matrix</a>
+            <div class="dropdown-content">
+                <a href="../Hours/HourMatrix_MP.html">Mail processing</a>
+                <a href="../Hours/HourMatrix_CD.html">Collection & Delivery</a>
+                <a href="../Hours/HourMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Reference</a>
+            <div class="dropdown-content">
+                <a href="../Reference/ActGrp.html">Act Group</a>
+                <a href="../Reference/Adjustments.html">Adjustments</a>
+                <a href="../Reference/AllocationRates.html">Allocation Rates</a>
+                <a href="../Reference/Dollars.html">BW Dollars</a>
+                <a href="../Reference/GLCEGrp_Dollars.html">GLCE Group (Dollars)</a>
+                <a href="../Reference/GLCEGrp_Hours.html">GLCE Group (Hours)</a>
+                <a href="../Reference/Hours.html">BW Hours</a>
+                <a href="../Reference/HoursNonHoursSplit.html">Hours v Non Hours Related</a>
+                <a href="../Reference/LYPaidRate.html">LY Paid Rate</a>
+                <a href="../Reference/Plant_NonPlant.html">Plant v Non Plant</a>
+                <a href="../Reference/TimeGroup_Dollars.html">Time Group (Dollars)</a>
+                <a href="../Reference/TimeGroup_Hours.html">Time Group (Hours)</a>
+                <a href="../Reference/WageIncrease.html">Wage Increase</a>
+            </div>
+        </li>
+    </ul>
+    <header><b>CUPW & CPAA Wage Increase</b></header>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+    <p>
+        The CUPW and CPAA wage increase are dollar impacts due to negotiated wage increases for the CPAA and CUPW unions.
+        <br>
+        <br>
+        They are calculated for all Hours Related dollar impacts, as well as the C&D Route (over assessed) and Rest&BG (rest and boot and glove)
+        which are Non Hours Related (see the <a href="HoursNonHoursSplit.html">Hours and Non Hours Related Split</a>).
+        <br>
+        <br>
+        The C&D and MP <a href="ActGrp.html">ActGroups</a> are only CUPW employees (Union = CUPW) and the CO ActGroup is made up of a mix of 
+        CUPW and CPAA (Union = CUPW/CPAA). This split, along with the weighted wage increase for each SHN is found in the T007 table, which 
+        can be accessed via the Labour Type Rate Analysis report.
+        <br>
+        <br>
+        An abridged example of the T007 and a few examples of the rate is calculated is shown below.
+    </p>
+        <TABLE>
+            <caption>T007 - Wage Increase % (Example)</caption>
+            <tr>
+                <th>GM</th>
+                <th>Union</th>
+                <th>P01</th>
+                <th>P02</th>
+                <th>...</th>
+                <th>P12</th>
+                <th>CUPW01</th>
+                <th>CUPW02</th>
+                <th>...</th>
+                <th>CUPW12</th>
+                <th>CPAA01</th>
+                <th>CPAA02</th>
+                <th>...</th>
+                <th>CPAA12</th>
+            </tr>
+            <tr>
+                <td>SHN103979</td>
+                <td>CUPW</td>
+                <td>0.01</td>
+                <td>0.01</td>
+                <td></td>
+                <td>0.01</td>
+                <td>1</td>
+                <td>1</td>
+                <td></td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td></td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>SHN103979</td>
+                <td>CUPW/CPAA</td>
+                <td>0.018</td>
+                <td>0.018</td>
+                <td></td>
+                <td>0.018</td>
+                <td>0.2</td>
+                <td>0.2</td>
+                <td></td>
+                <td>0.2</td>
+                <td>0.8</td>
+                <td>0.8</td>
+                <td></td>
+                <td>0.8</td>
+            </tr>
+            <tr>
+                <td>SHN103980</td>
+                <td>CUPW</td>
+                <td>0.01</td>
+                <td>0.01</td>
+                <td></td>
+                <td>0.01</td>
+                <td>1</td>
+                <td>1</td>
+                <td></td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td></td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>SHN103980</td>
+                <td>CUPW/CPAA</td>
+                <td>0.0184</td>
+                <td>0.0184</td>
+                <td></td>
+                <td>0.0184</td>
+                <td>0.16</td>
+                <td>0.16</td>
+                <td></td>
+                <td>0.16</td>
+                <td>0.84</td>
+                <td>0.84</td>
+                <td></td>
+                <td>0.84</td>
+            </tr>       
+        </TABLE>
+    <p>
+        The cells P01, P02 ... P12 are the weighted wage increase for each SHN/Union combination. They are calculated outside of the DLM.
+        <br>
+        <br>
+        The cells CUPW01, CUPW02 ... CUPW12 and CPAA01, CPAA02 ... CPAA12 are the percentages of each union type amongst the employees in each
+        SHN/Union combo, for CUPW and CPAA respectively.
+        <br>
+        <br>
+        There are monthly CPAA and CUPW wage increases which are no directly shown in the T007, but are used to calculate the weighted wage increases.
+        An exmaple wage increase table, which was used to calculate the example T007 above, is shown below.
+    <p>
+    <table>
+        <caption>CUPW & CPAA Wage Increases (Example)</caption>
+        <tr>
+            <th>Union</th>
+            <th>P01</th>
+            <th>P02</th>
+            <th>...</th>
+            <th>P12</th>
+        </tr>
+        <tr>
+            <td>CUPW</td>
+            <td>0.01</td>
+            <td>0.01</td>
+            <td></td>
+            <td>0.01</td>
+        </tr>
+        <tr>
+            <td>CPAA</td>
+            <td>0.02</td>
+            <td>0.02</td>
+            <td></td>
+            <td>0.02</td>
+        </tr>
+    </TABLE>
+    <p>
+        <i><b>General Formula</b></i>
+    </p>
+    <p class = "eq">
+        Weighted Return = [CUPW Employee %] * [CUPW Wage Increase (%)] + [CPAA Employee %] * [CPAA Wage Increase (%)]
+        <br>
+        CUPW Wage Increase = ([TY Dollars] - [TY Dollars] / (1 + [Weighted Return])) * [CUPW Employee %]
+        <br>
+        CPAA Wage Increase = ([TY Dollars] - [TY Dollars] / (1 + [Weighted Return])) * [CPAA Employee %]
+        <br>
+        <br>
+    </p>
+    <p>
+        <i><b>Example 1:</b></i>
+        <br>
+        <i>P01; SHN = SHN103979; ActSubGrp = LC (Union = CUPW)</i>
+    </p>
+    <p class = "eq">
+        <i>From Table:</i> CUPW Wage Increase = 1%; CPAA Wage Increase = 2%; CUPW Employee % = 100%; CPAA Employee % = 0%
+        <br>
+        <i>From BW 9000:</i> TY Dollars = 100
+        <br>
+        <br>
+        P01 Weighted Wage Increase = (1)*(0.01) + (0)*(0.02) = 0.01
+        <br>
+        CUPW Wage Increase = [100 - 100 / (1 + 0.01)] * (1) = <b>$0.99</b>
+        <br>
+        CPAA Wage Increase = [100 - 100 / (1 + 0.01)] * (0) = <b>$0.00</b>
+    </p>
+    <p>
+        <i><b>Example 2:</b></i>
+        <br>
+        <i>P01; SHN = SHN103980; ActSubGrp = CO (Union = CUPW/CPAA)</i>
+    </p>
+    <p class = "eq">
+        <i>From Table:</i> CUPW Wage Increase = 1%; CPAA Wage Increase = 2%; CUPW Employee % = 20%; CPAA Employee % = 80%
+        <br>
+        <i>From BW 9000:</i> TY Dollars = 100
+        <br>
+        <br>
+        P01 Weighted Wage Increase = (0.16)*(0.01) + (0.84)*(0.02) = 0.0184
+        <br>
+        CUPW Wage Increase = [100 - 100 / (1 + 0.0184)] * (0.16) = <b>$0.29</b>
+        <br>
+        CPAA Wage Increase = [100 - 100 / (1 + 0.0184)] * (0.84) = <b>$1.52</b>
+    </p>
+    <p>
+      <b>Further Links:</b>	
+      <br>
+      <a href="Dollars.html">[TY Dollars]</a>														
+      <br>
+      <a href="HoursNonHoursSplit.html">Hours and Non Hours Related Split</a>
+      <br>
+      <a href="ActGrp.html">ActGroups</a>																					
+    </p>																												
+  </body>	

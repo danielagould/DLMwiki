@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <ul>
+        <li><b>Direct Labour Model Methodology</b></li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Drivers</a>
+            <div class="dropdown-content">
+                <a href="../Driver/Driver_MP.html">Mail processing</a>
+                <a href="../Driver/Driver_CD.html">Collection & Delivery</a>
+                <a href="../Driver/Driver_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Dollars Matrix</a>
+            <div class="dropdown-content">
+                <a href="../Dollars/DollarMatrix_MP.html">Mail processing</a>
+                <a href="../Dollars/DollarMatrix_CD.html">Collection & Delivery</a>
+                <a href="../Dollars/DollarMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Hours Matrix</a>
+            <div class="dropdown-content">
+                <a href="../Hours/HourMatrix_MP.html">Mail processing</a>
+                <a href="../Hours/HourMatrix_CD.html">Collection & Delivery</a>
+                <a href="../Hours/HourMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Reference</a>
+            <div class="dropdown-content">
+                <a href="../Reference/ActGrp.html">Act Group</a>
+                <a href="../Reference/Adjustments.html">Adjustments</a>
+                <a href="../Reference/AllocationRates.html">Allocation Rates</a>
+                <a href="../Reference/Dollars.html">BW Dollars</a>
+                <a href="../Reference/GLCEGrp_Dollars.html">GLCE Group (Dollars)</a>
+                <a href="../Reference/GLCEGrp_Hours.html">GLCE Group (Hours)</a>
+                <a href="../Reference/Hours.html">BW Hours</a>
+                <a href="../Reference/HoursNonHoursSplit.html">Hours v Non Hours Related</a>
+                <a href="../Reference/LYPaidRate.html">LY Paid Rate</a>
+                <a href="../Reference/Plant_NonPlant.html">Plant v Non Plant</a>
+                <a href="../Reference/TimeGroup_Dollars.html">Time Group (Dollars)</a>
+                <a href="../Reference/TimeGroup_Hours.html">Time Group (Hours)</a>
+                <a href="../Reference/WageIncrease.html">Wage Increase</a>
+            </div>
+        </li>
+    </ul>
+    <header><b>Plant and Non Plant Split</b></header>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+    <p>
+        All MP <a href="../Reference/ActGrp.html">Act Group</a> hours and dollars are separated into
+        Plant and Non Plant. This distinction is important as it differentiates MP hours in depots from 
+        those in large mail processing plants.
+        <br>
+        <br>
+        The split is done by cost centre, with some all the major processing plant cost centres 
+        identified as an input into the DLM model. All MP hours/dollars associated with these plant cost
+        centres are rolled up as MP Plant. All remaining MP hours/dollars are rolled up as MP Non
+        Plant.
+        <br>
+        <br>
+        The list of major processing plant cost centres are found below.
+    </p>
+    <table>
+        <caption>Major Processing Plant Cost Centres</caption>
+            <tr>
+                <th>CC</th>
+                <th>VP</th>
+                <th>GM</th>
+                <th>Director</th>
+                <th>CC Name</th>
+            </tr>
+            <tr>
+                <td>104189</td>
+                <td>SHN103811</td>
+                <td>SHN103812</td>
+                <td>SHN104189</td>
+                <td>ENG MAINT DIR EDM PRA</td>
+                </tr>
+                <tr>
+                <td>104507</td>
+                <td>SHN103811</td>
+                <td>SHN103812</td>
+                <td>SHN104189</td>
+                <td>ENG MAINT RU SASK PRA</td>
+                </tr>
+                <tr>
+                <td>518190</td>
+                <td>SHN103811</td>
+                <td>SHN103812</td>
+                <td>SHN104189</td>
+                <td>ENG MAINT MGR WPG PRA</td>
+                </tr>
+                <tr>
+                <td>550779</td>
+                <td>SHN103811</td>
+                <td>SHN103812</td>
+                <td>SHN104189</td>
+                <td>ENG MAINT SHF SPT REG PRA</td>
+                </tr>
+                <tr>
+                <td>580228</td>
+                <td>SHN103811</td>
+                <td>SHN103812</td>
+                <td>SHN104189</td>
+                <td>ENG MAINTENANCE MGR EDM PRA</td>
+                </tr>
+                <tr>
+                <td>581003</td>
+                <td>SHN103811</td>
+                <td>SHN103812</td>
+                <td>SHN104189</td>
+                <td>ENG MAINTENANCE MGR CAL PRA</td>
+                </tr>
+                <tr>
+                <td>650250</td>
+                <td>SHN103811</td>
+                <td>SHN103812</td>
+                <td>SHN104189</td>
+                <td>ENG MAINTENANCE MGR VAN PAC</td>
+                </tr>
+                <tr>
+                <td>22276</td>
+                <td>SHN103811</td>
+                <td>SHN103812</td>
+                <td>SHN104190</td>
+                <td>ENG MAINT MGR HAM ONT</td>
+                </tr>
+                <tr>
+                <td>104190</td>
+                <td>SHN103811</td>
+                <td>SHN103812</td>
+                <td>SHN104190</td>
+                <td>ENG MAINT DIR TOR GTA</td>
+                </tr>
+                <tr>
+                <td>362794</td>
+                <td>SHN103811</td>
+                <td>SHN103812</td>
+                <td>SHN104190</td>
+                <td>ENG MAINT MGR MSSAGA GTA</td>
+                </tr>
+                <tr>
+                <td>374008</td>
+                <td>SHN103811</td>
+                <td>SHN103812</td>
+                <td>SHN104190</td>
+                <td>ENG MAINT MGR TOR GTA</td>
+                </tr>
+                <tr>
+                <td>7250</td>
+                <td>SHN103811</td>
+                <td>SHN103812</td>
+                <td>SHN104191</td>
+                <td>ENG MAINT RU SJS ATL</td>
+                </tr>
+                <tr>
+                <td>46345</td>
+                <td>SHN103811</td>
+                <td>SHN103812</td>
+                <td>SHN104191</td>
+                <td>ENG MAINT MGR HFX ATL</td>
+                </tr>
+                <tr>
+                <td>104191</td>
+                <td>SHN103811</td>
+                <td>SHN103812</td>
+                <td>SHN104191</td>
+                <td>ENG MAINT DIR MTL QUE</td>
+                </tr>
+                <tr>
+                <td>104906</td>
+                <td>SHN103811</td>
+                <td>SHN103812</td>
+                <td>SHN104191</td>
+                <td>ENG MAINT SPT HFX ATL</td>
+                </tr>
+                <tr>
+                <td>104958</td>
+                <td>SHN103811</td>
+                <td>SHN103812</td>
+                <td>SHN104191</td>
+                <td>ENG MAINT FLD SUP MGR MTL QUE</td>
+                </tr>
+                <tr>
+                <td>124591</td>
+                <td>SHN103811</td>
+                <td>SHN103812</td>
+                <td>SHN104191</td>
+                <td>ENG MAINT RU SJN ATL</td>
+                </tr>
+                <tr>
+                <td>218189</td>
+                <td>SHN103811</td>
+                <td>SHN103812</td>
+                <td>SHN104191</td>
+                <td>ENG MAINT MGR ST LAURENT QUE</td>
+                </tr>
+                <tr>
+                <td>318574</td>
+                <td>SHN103811</td>
+                <td>SHN103812</td>
+                <td>SHN104191</td>
+                <td>ENG MAINT MGR OTT ONT</td>
+                </tr>
+                <tr>
+                <td>101842</td>
+                <td>SHN103974</td>
+                <td>SHN103979</td>
+                <td>SHN104535</td>
+                <td>OPS VAN TRNS MGR PAC</td>
+                </tr>
+                <tr>
+                <td>104535</td>
+                <td>SHN103974</td>
+                <td>SHN103979</td>
+                <td>SHN104535</td>
+                <td>OPS VANCOUVER RU PAC</td>
+                </tr>
+                <tr>
+                <td>105509</td>
+                <td>SHN103974</td>
+                <td>SHN103979</td>
+                <td>SHN104535</td>
+                <td>OPS VAN PIF MGR PAC</td>
+                </tr>
+                <tr>
+                <td>136859</td>
+                <td>SHN103974</td>
+                <td>SHN103979</td>
+                <td>SHN104535</td>
+                <td>OPS PCR MP VAN MGR PAC</td>
+                </tr>
+                <tr>
+                <td>10071</td>
+                <td>SHN103974</td>
+                <td>SHN103979</td>
+                <td>SHN420778</td>
+                <td>SAME DAY DELIVERY - VANCOUVER PILOT</td>
+                </tr>
+                <tr>
+                <td>348872</td>
+                <td>SHN103974</td>
+                <td>SHN103979</td>
+                <td>SHN420778</td>
+                <td>OPS PCR DEL LA  BC MGR PAC</td>
+                </tr>
+                <tr>
+                <td>438502</td>
+                <td>SHN103974</td>
+                <td>SHN103979</td>
+                <td>SHN650269</td>
+                <td>OPS MP VIC SPT PAC</td>
+                </tr>
+                <tr>
+                <td>101691</td>
+                <td>SHN103974</td>
+                <td>SHN103980</td>
+                <td>SHN101691</td>
+                <td>OPS GTE DIR GTA</td>
+                </tr>
+                <tr>
+                <td>102544</td>
+                <td>SHN103974</td>
+                <td>SHN103980</td>
+                <td>SHN101691</td>
+                <td>OPS GTE RU GTA</td>
+                </tr>
+                <tr>
+                <td>137634</td>
+                <td>SHN103974</td>
+                <td>SHN103980</td>
+                <td>SHN101691</td>
+                <td>OPS PCR MP W/E GATEWAY MGR GTA</td>
+                </tr>
+                <tr>
+                <td>104247</td>
+                <td>SHN103974</td>
+                <td>SHN103980</td>
+                <td>SHN104247</td>
+                <td>OPS GTW DIR GTA</td>
+                </tr>
+                <tr>
+                <td>104362</td>
+                <td>SHN103974</td>
+                <td>SHN103980</td>
+                <td>SHN104247</td>
+                <td>OPS GTW RU GTA</td>
+                </tr>
+                <tr>
+                <td>138010</td>
+                <td>SHN103974</td>
+                <td>SHN103980</td>
+                <td>SHN104247</td>
+                <td>OPS GTW RVU MGR GTA</td>
+                </tr>
+                <tr>
+                <td>367907</td>
+                <td>SHN103974</td>
+                <td>SHN103980</td>
+                <td>SHN341959</td>
+                <td>OPS W PDC PCL DEL RU GTA</td>
+                </tr>
+                <tr>
+                <td>342009</td>
+                <td>SHN103974</td>
+                <td>SHN103980</td>
+                <td>SHN372714</td>
+                <td>OPS PCR DEL GTAW MGR GTA</td>
+                </tr>
+                <tr>
+                <td>102554</td>
+                <td>SHN103974</td>
+                <td>SHN103980</td>
+                <td>SHN373451</td>
+                <td>OPS SC RU GTA</td>
+                </tr>
+                <tr>
+                <td>102881</td>
+                <td>SHN103974</td>
+                <td>SHN103980</td>
+                <td>SHN373451</td>
+                <td>OPS SC RVU MGR GTA</td>
+                </tr>
+                <tr>
+                <td>135399</td>
+                <td>SHN103974</td>
+                <td>SHN103980</td>
+                <td>SHN373451</td>
+                <td>OPS PCR MP SC MGR GTA</td>
+                </tr>
+                <tr>
+                <td>373451</td>
+                <td>SHN103974</td>
+                <td>SHN103980</td>
+                <td>SHN373451</td>
+                <td>OPS SC DIR GTA</td>
+                </tr>
+                <tr>
+                <td>104922</td>
+                <td>SHN103974</td>
+                <td>SHN103980</td>
+                <td>SHN417823</td>
+                <td>OPS SCARBOROUGH YDC MGR GTA</td>
+                </tr>
+                <tr>
+                <td>380458</td>
+                <td>SHN103974</td>
+                <td>SHN103980</td>
+                <td>SHN417823</td>
+                <td>OPS YDC RU GTA</td>
+                </tr>
+                <tr>
+                <td>102594</td>
+                <td>SHN103974</td>
+                <td>SHN103982</td>
+                <td>SHN416541</td>
+                <td>OPS REG RU PRA</td>
+                </tr>
+                <tr>
+                <td>102600</td>
+                <td>SHN103974</td>
+                <td>SHN103982</td>
+                <td>SHN416541</td>
+                <td>OPS SAS RU PRA</td>
+                </tr>
+                <tr>
+                <td>550574</td>
+                <td>SHN103974</td>
+                <td>SHN103982</td>
+                <td>SHN416541</td>
+                <td>OPS SAS MGR PRA</td>
+                </tr>
+                <tr>
+                <td>550701</td>
+                <td>SHN103974</td>
+                <td>SHN103982</td>
+                <td>SHN416541</td>
+                <td>OPS REG MGR PRA</td>
+                </tr>
+                <tr>
+                <td>102287</td>
+                <td>SHN103974</td>
+                <td>SHN103982</td>
+                <td>SHN518174</td>
+                <td>OPS PCR MP MB AND SK SPT PRA</td>
+                </tr>
+                <tr>
+                <td>103686</td>
+                <td>SHN103974</td>
+                <td>SHN103982</td>
+                <td>SHN518174</td>
+                <td>OPS WPG RU PRA</td>
+                </tr>
+                <tr>
+                <td>136913</td>
+                <td>SHN103974</td>
+                <td>SHN103982</td>
+                <td>SHN518174</td>
+                <td>OPS PCR MP DEL LA MB AND SK MGR PRA</td>
+                </tr>
+                <tr>
+                <td>102608</td>
+                <td>SHN103974</td>
+                <td>SHN103982</td>
+                <td>SHN580260</td>
+                <td>OPS EDM RU PRA</td>
+                </tr>
+                <tr>
+                <td>137162</td>
+                <td>SHN103974</td>
+                <td>SHN103982</td>
+                <td>SHN580260</td>
+                <td>OPS PCR MP DEL EDM AND AB FIELD MGR PRA</td>
+                </tr>
+                <tr>
+                <td>102604</td>
+                <td>SHN103974</td>
+                <td>SHN103982</td>
+                <td>SHN580872</td>
+                <td>OPS CAL RU PRA</td>
+                </tr>
+                <tr>
+                <td>136948</td>
+                <td>SHN103974</td>
+                <td>SHN103982</td>
+                <td>SHN580872</td>
+                <td>OPS PCR MP DEL CAL MGR PRA</td>
+                </tr>
+                <tr>
+                <td>102568</td>
+                <td>SHN103974</td>
+                <td>SHN103983</td>
+                <td>SHN021989</td>
+                <td>OPS HAM RU ONT</td>
+                </tr>
+                <tr>
+                <td>102578</td>
+                <td>SHN103974</td>
+                <td>SHN103983</td>
+                <td>SHN021989</td>
+                <td>OPS KIT RU ONT</td>
+                </tr>
+                <tr>
+                <td>137421</td>
+                <td>SHN103974</td>
+                <td>SHN103983</td>
+                <td>SHN021989</td>
+                <td>OPS PCR MP DEL HAM KITCHENER MGR ONT</td>
+                </tr>
+                <tr>
+                <td>396699</td>
+                <td>SHN103974</td>
+                <td>SHN103983</td>
+                <td>SHN021989</td>
+                <td>OPS KIT S2 TRNS RU ONT</td>
+                </tr>
+                <tr>
+                <td>329657</td>
+                <td>SHN103974</td>
+                <td>SHN103983</td>
+                <td>SHN245720</td>
+                <td>OPS MP SUDBURY SPT ONT</td>
+                </tr>
+                <tr>
+                <td>530409</td>
+                <td>SHN103974</td>
+                <td>SHN103983</td>
+                <td>SHN245720</td>
+                <td>OPS MP THUNDER BAY SPT ONT</td>
+                </tr>
+                <tr>
+                <td>102564</td>
+                <td>SHN103974</td>
+                <td>SHN103983</td>
+                <td>SHN313351</td>
+                <td>OPS OTT RU ONT</td>
+                </tr>
+                <tr>
+                <td>137294</td>
+                <td>SHN103974</td>
+                <td>SHN103983</td>
+                <td>SHN313351</td>
+                <td>OPS PCR MP DEL LA  EAST AND NORTH MGR ON</td>
+                </tr>
+                <tr>
+                <td>313351</td>
+                <td>SHN103974</td>
+                <td>SHN103983</td>
+                <td>SHN313351</td>
+                <td>OPS EASTERN ONT DIR ONT</td>
+                </tr>
+                <tr>
+                <td>430587</td>
+                <td>SHN103974</td>
+                <td>SHN103983</td>
+                <td>SHN313351</td>
+                <td>OPS OTT S2 TRANS RU ONT</td>
+                </tr>
+                <tr>
+                <td>58769</td>
+                <td>SHN103974</td>
+                <td>SHN103983</td>
+                <td>SHN396303</td>
+                <td>OPS PCR LA LONDON WINDSOR MGR ONT</td>
+                </tr>
+                <tr>
+                <td>102574</td>
+                <td>SHN103974</td>
+                <td>SHN103983</td>
+                <td>SHN396303</td>
+                <td>OPS LDN RU ONT</td>
+                </tr>
+                <tr>
+                <td>102584</td>
+                <td>SHN103974</td>
+                <td>SHN103983</td>
+                <td>SHN396303</td>
+                <td>OPS WIN RU ONT</td>
+                </tr>
+                <tr>
+                <td>396516</td>
+                <td>SHN103974</td>
+                <td>SHN103983</td>
+                <td>SHN396303</td>
+                <td>OPS LDN S2 TRNS RU ONT</td>
+                </tr>
+                <tr>
+                <td>396648</td>
+                <td>SHN103974</td>
+                <td>SHN103983</td>
+                <td>SHN396303</td>
+                <td>OPS WIN S2 TRNS RU ONT</td>
+                </tr>
+                <tr>
+                <td>397237</td>
+                <td>SHN103974</td>
+                <td>SHN103983</td>
+                <td>SHN396303</td>
+                <td>OPS LDN MGR ONT</td>
+                </tr>
+                <tr>
+                <td>101359</td>
+                <td>SHN103974</td>
+                <td>SHN103984</td>
+                <td>SHN101359</td>
+                <td>OPS LBL DIR QUE</td>
+                </tr>
+                <tr>
+                <td>102534</td>
+                <td>SHN103974</td>
+                <td>SHN103984</td>
+                <td>SHN101359</td>
+                <td>OPS LBL RU QUE</td>
+                </tr>
+                <tr>
+                <td>235512</td>
+                <td>SHN103974</td>
+                <td>SHN103984</td>
+                <td>SHN101359</td>
+                <td>OPS PCR MP LB MGR QUE</td>
+                </tr>
+                <tr>
+                <td>245763</td>
+                <td>SHN103974</td>
+                <td>SHN103984</td>
+                <td>SHN101359</td>
+                <td>OPS LBL RVU MGR QUE</td>
+                </tr>
+                <tr>
+                <td>104301</td>
+                <td>SHN103974</td>
+                <td>SHN103984</td>
+                <td>SHN155594</td>
+                <td>OPS PCR LA SPT QUE</td>
+                </tr>
+                <tr>
+                <td>104652</td>
+                <td>SHN103974</td>
+                <td>SHN103984</td>
+                <td>SHN155594</td>
+                <td>OPS PCR LA MGR QUE</td>
+                </tr>
+                <tr>
+                <td>102946</td>
+                <td>SHN103974</td>
+                <td>SHN103984</td>
+                <td>SHN193119</td>
+                <td>OPS QUE S2 TRNS SPV EAST</td>
+                </tr>
+                <tr>
+                <td>192554</td>
+                <td>SHN103974</td>
+                <td>SHN103984</td>
+                <td>SHN193119</td>
+                <td>OPS QUE MGR QUE</td>
+                </tr>
+                <tr>
+                <td>101885</td>
+                <td>SHN103974</td>
+                <td>SHN103984</td>
+                <td>SHN210358</td>
+                <td>OPS LBP HUB BRIDGE RU QUE</td>
+                </tr>
+                <tr>
+                <td>102538</td>
+                <td>SHN103974</td>
+                <td>SHN103984</td>
+                <td>SHN210358</td>
+                <td>OPS LBP RU QUE</td>
+                </tr>
+                <tr>
+                <td>210358</td>
+                <td>SHN103974</td>
+                <td>SHN103984</td>
+                <td>SHN210358</td>
+                <td>OPS LBP DIR QUE</td>
+                </tr>
+                <tr>
+                <td>266507</td>
+                <td>SHN103974</td>
+                <td>SHN103984</td>
+                <td>SHN417815</td>
+                <td>OPS PCR DEL MTL MGR QUE</td>
+                </tr>
+                <tr>
+                <td>102009</td>
+                <td>SHN103974</td>
+                <td>SHN119423</td>
+                <td>SHN040029</td>
+                <td>OPS MCT S1 S3 SPT ATL</td>
+                </tr>
+                <tr>
+                <td>102314</td>
+                <td>SHN103974</td>
+                <td>SHN119423</td>
+                <td>SHN040029</td>
+                <td>OPS SJN SPT ATL</td>
+                </tr>
+                <tr>
+                <td>39470</td>
+                <td>SHN103974</td>
+                <td>SHN119423</td>
+                <td>SHN130451</td>
+                <td>OPS HFX MGR ATL</td>
+                </tr>
+                <tr>
+                <td>101869</td>
+                <td>SHN103974</td>
+                <td>SHN119423</td>
+                <td>SHN130451</td>
+                <td>OPS HFX S2 TRNS RU ATL</td>
+                </tr>
+                <tr>
+                <td>102286</td>
+                <td>SHN103974</td>
+                <td>SHN119423</td>
+                <td>SHN130451</td>
+                <td>OPS PCR LA SPT ATL</td>
+                </tr>
+                <tr>
+                <td>137278</td>
+                <td>SHN103974</td>
+                <td>SHN119423</td>
+                <td>SHN130451</td>
+                <td>OPS PCR MP SPT ATL</td>
+                </tr>
+                <tr>
+                <td>137308</td>
+                <td>SHN103974</td>
+                <td>SHN119423</td>
+                <td>SHN130451</td>
+                <td>OPS PCR DEL SPT ATL</td>
+                </tr>
+                <tr>
+                <td>251933</td>
+                <td>SHN103974</td>
+                <td>SHN119423</td>
+                <td>SHN130451</td>
+                <td>OPS PCR MP DEL LA MGR ATL</td>
+                </tr>
+                <tr>
+                <td>4588</td>
+                <td>SHN103974</td>
+                <td>SHN119423</td>
+                <td>SHN416525</td>
+                <td>OPS SJS MGR ATL</td>
+                </tr>
+                <tr>
+                <td>102307</td>
+                <td>SHN103974</td>
+                <td>SHN119423</td>
+                <td>SHN416525</td>
+                <td>OPS SJS RU ATL</td>
+            </tr>    
+    </table>
+</body> 
+</html>

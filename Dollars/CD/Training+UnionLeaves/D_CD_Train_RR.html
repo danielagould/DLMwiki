@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <ul>
+        <li><b>Direct Labour Model Methodology</b></li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Drivers</a>
+            <div class="dropdown-content">
+                <a href="../../../Driver/Driver_MP.html">Mail processing</a>
+                <a href="../../../Driver/Driver_CD.html">Collection & Delivery</a>
+                <a href="../../../Driver/Driver_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Dollars Matrix</a>
+            <div class="dropdown-content">
+                <a href="../../DollarMatrix_MP.html">Mail processing</a>
+                <a href="../../DollarMatrix_CD.html">Collection & Delivery</a>
+                <a href="../../DollarMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Hours Matrix</a>
+            <div class="dropdown-content">
+                <a href="../../../Hours/HourMatrix_MP.html">Mail processing</a>
+                <a href="../../../Hours/HourMatrix_CD.html">Collection & Delivery</a>
+                <a href="../../../Hours/HourMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+          <a href="javascript:void(0)" class="dropbtn">Reference</a>
+          <div class="dropdown-content">
+              <a href="../../../Reference/ActGrp.html">Act Group</a>
+              <a href="../../../Reference/Adjustments.html">Adjustments</a>
+              <a href="../../../Reference/AllocationRates.html">Allocation Rates</a>
+              <a href="../../../Reference/Dollars.html">BW Dollars</a>
+              <a href="../../../Reference/GLCEGrp_Dollars.html">GLCE Group (Dollars)</a>
+              <a href="../../../Reference/GLCEGrp_Hours.html">GLCE Group (Hours)</a>
+              <a href="../../../Reference/Hours.html">BW Hours</a>
+              <a href="../../../Reference/HoursNonHoursSplit.html">Hours v Non Hours Related</a>
+              <a href="../../../Reference/LYPaidRate.html">LY Paid Rate</a>
+              <a href="../../../Reference/Plant_NonPlant.html">Plant v Non Plant</a>
+              <a href="../../../Reference/TimeGroup_Dollars.html">Time Group (Dollars)</a>
+              <a href="../../../Reference/TimeGroup_Hours.html">Time Group (Hours)</a>
+              <a href="../../../Reference/WageIncrease.html">Wage Increase</a>
+          </div>
+      </li>
+    </ul>
+    <link rel="stylesheet" href="../../../style.css" />
+</head>
+<body>
+    <Table class = "style2">
+        <tr class = "style2">
+          <td class = "style3" align = "right"><b>Tab:</b></td>
+          <td class = "style3">Matrix</td></tr>
+        <tr class = "style2">
+          <td class = "style3" align = "right"><b>Table:</b></td>
+          <td class = "style3">Collection & Delivery</td></tr>								
+        <tr class = "style2">
+          <td class = "style3" align = "right"><b>Data Type:</b></td>
+          <td class = "style3">Dollars</td></tr>	
+        <tr class = "style2">
+          <td class = "style3" align = "right"><b>Row:</b></td>
+          <td class = "style3">Training & Union Leaves</td></tr>	
+        <tr class = "style2">
+          <td class = "style3" align = "right"><b>Column:</b></td>
+          <td class = "style3">Residual Rate & Allowances</td></tr>	
+      </Table>														
+  <p class = "eq">														
+    <i>Value = <b> <a href="../../../Reference/Dollars.html">[TY Dollars]</a>	 - { <a href="../../../Reference/Dollars.html">[LY Dollars]</a> 
+      + <a href="D_CD_Train_LCBench.html">[LC Benchmark]</a> 
+      + <a href="D_CD_Train_LCAProd.html">[LCA Productivity (Hours Worked)]</a>	
+      + <a href="D_CD_Train_MSCBench.html">[MSC Benchmark]</a>
+      + <a href="D_CD_Train_Train.html">[Training & Union Leaves]</a>
+      + <a href="D_CD_Train_VolRest.html">[Volume Count Restructures]</a> 
+      + <a href="D_CD_Train_LCPOCGro.html">[LC POC Growth]</a> 
+      + <a href="D_CD_Train_Invest.html">[Investments]</a> 	
+      + <a href="D_CD_Train_MSCRest.html">[MSC Restructures]</a>
+      + <a href="D_CD_Train_NeighborMail.html">[Neighbourhood Mail Prep-Time]</a> 	 	
+      + <a href="D_CD_Train_Reorg.html">[Reorg & Coding]</a> 
+      + <a href="D_CD_Train_Wage.html">[Wage Increase]</a>	
+      + <a href="D_CD_Train_TradeDays.html">[Trade Days Adj.]</a> 
+      + <a href="D_CD_Train_Days.html">[Days Adjustments]</a> }</b></i>
+    </p>																												
+  <table>															
+    <tr>	<td>	<i>Name</i>	</td>	
+      <td>	<i>Fiscal Year</i>	</td>	
+      <td>	<i>GLCE Group</i>	</td>	
+      <td>	<i>Act Group</i>	</td>	
+      <td>  <i>Hours or Non Hours Related</i></td>
+    </tr>
+    <tr>	<td>	[TY Dollars]	</td>	
+      <td>  TY	</td>	
+      <td>  Train/Oth	</td>	
+      <td>	CD	</td>	
+      <td>  Hours Related </td>
+    </tr>
+    <tr>	<td>	[LY Dollars]	</td>	
+      <td>  LY	</td>	
+      <td>  Train/Oth </td>	
+      <td>	CD	</td>	
+      <td>  Hours Related </td>
+    </tr>
+  </table>
+  <p>
+      <i>The CD Act Group contains the Act Sub Groups LC, LCA and MSC </i>
+  </p>																				
+  <p>															
+    <b>Further Links:</b>	
+    <br>
+    <a href="../../../Reference/ActGrp.html">[Act Group]</a>	
+    <br>														
+    <a href="../../../Reference/GLCEGrp_Dollars.html">[GLCE Group]</a>	
+    <br>														
+    <a href="../../../Reference/HoursNonHoursSplit.html">[Hours or Non Hours Related Split]</a>	
+  </p>
+</body>															
+</html>

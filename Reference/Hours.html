@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <ul>
+        <li><b>Direct Labour Model Methodology</b></li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Drivers</a>
+            <div class="dropdown-content">
+                <a href="../Driver/Driver_MP.html">Mail processing</a>
+                <a href="../Driver/Driver_CD.html">Collection & Delivery</a>
+                <a href="../Driver/Driver_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Dollars Matrix</a>
+            <div class="dropdown-content">
+                <a href="../Dollars/DollarMatrix_MP.html">Mail processing</a>
+                <a href="../Dollars/DollarMatrix_CD.html">Collection & Delivery</a>
+                <a href="../Dollars/DollarMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Hours Matrix</a>
+            <div class="dropdown-content">
+                <a href="../Hours/HourMatrix_MP.html">Mail processing</a>
+                <a href="../Hours/HourMatrix_CD.html">Collection & Delivery</a>
+                <a href="../Hours/HourMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Reference</a>
+            <div class="dropdown-content">
+                <a href="../Reference/ActGrp.html">Act Group</a>
+                <a href="../Reference/Adjustments.html">Adjustments</a>
+                <a href="../Reference/AllocationRates.html">Allocation Rates</a>
+                <a href="../Reference/Dollars.html">BW Dollars</a>
+                <a href="../Reference/GLCEGrp_Dollars.html">GLCE Group (Dollars)</a>
+                <a href="../Reference/GLCEGrp_Hours.html">GLCE Group (Hours)</a>
+                <a href="../Reference/Hours.html">BW Hours</a>
+                <a href="../Reference/HoursNonHoursSplit.html">Hours v Non Hours Related</a>
+                <a href="../Reference/LYPaidRate.html">LY Paid Rate</a>
+                <a href="../Reference/Plant_NonPlant.html">Plant v Non Plant</a>
+                <a href="../Reference/TimeGroup_Dollars.html">Time Group (Dollars)</a>
+                <a href="../Reference/TimeGroup_Hours.html">Time Group (Hours)</a>
+                <a href="../Reference/WageIncrease.html">Wage Increase</a>
+            </div>
+        </li>
+    </ul>
+    <header><b>BW Hours</b></header>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+    <p>
+        The straight, un adjusted hours in the DLM are sourced via custom BW queries which rely on the 9502 report data cube.
+        <br>
+        <br>
+        The <i>Time Type</i>, <i>Debited Act Type</i> and <i>Employee Subgroup</i> found in the 9502 are mapped to 
+        <a href="TimeGroup_Hours.html">Time Group</a>, 
+        <a href="ActGrp.html">Act Type Group</a> 
+        and <a href="GLCEGrp_Hours.html">GLCE Group</a> by the DLM.
+        <br>
+        <br>
+        The query is ran for each fiscal year (DLM notation):
+        <br>
+        Current Year (TY - This Year)
+        <br>
+        Previous Year (LY - Last Year)
+        <br>
+        Two Years Previous (LLY - Last Last Year)
+        <br>
+        <br>
+        The hours in the custom query are identical to those in the standard 9502 report. 
+        The custom nature of the query provides a high level of detail necessary for the calculation. 
+    </p>
+    <br>
+    <p class = "title">
+        <b>Output of BW Query [Z1_ZHOUYAN_DLM_9502_TY_35]</b>
+    </p>
+    <img src="9502Query_1.PNG" alt="Example of 9502 Custom Query">
+</body> 
+</html>

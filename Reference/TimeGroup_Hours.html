@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <ul>
+        <li><b>Direct Labour Model Methodology</b></li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Drivers</a>
+            <div class="dropdown-content">
+                <a href="../Driver/Driver_MP.html">Mail processing</a>
+                <a href="../Driver/Driver_CD.html">Collection & Delivery</a>
+                <a href="../Driver/Driver_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Dollars Matrix</a>
+            <div class="dropdown-content">
+                <a href="../Dollars/DollarMatrix_MP.html">Mail processing</a>
+                <a href="../Dollars/DollarMatrix_CD.html">Collection & Delivery</a>
+                <a href="../Dollars/DollarMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Hours Matrix</a>
+            <div class="dropdown-content">
+                <a href="../Hours/HourMatrix_MP.html">Mail processing</a>
+                <a href="../Hours/HourMatrix_CD.html">Collection & Delivery</a>
+                <a href="../Hours/HourMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Reference</a>
+            <div class="dropdown-content">
+                <a href="../Reference/ActGrp.html">Act Group</a>
+                <a href="../Reference/Adjustments.html">Adjustments</a>
+                <a href="../Reference/AllocationRates.html">Allocation Rates</a>
+                <a href="../Reference/Dollars.html">BW Dollars</a>
+                <a href="../Reference/GLCEGrp_Dollars.html">GLCE Group (Dollars)</a>
+                <a href="../Reference/GLCEGrp_Hours.html">GLCE Group (Hours)</a>
+                <a href="../Reference/Hours.html">BW Hours</a>
+                <a href="../Reference/HoursNonHoursSplit.html">Hours v Non Hours Related</a>
+                <a href="../Reference/LYPaidRate.html">LY Paid Rate</a>
+                <a href="../Reference/Plant_NonPlant.html">Plant v Non Plant</a>
+                <a href="../Reference/TimeGroup_Dollars.html">Time Group (Dollars)</a>
+                <a href="../Reference/TimeGroup_Hours.html">Time Group (Hours)</a>
+                <a href="../Reference/WageIncrease.html">Wage Increase</a>
+            </div>
+        </li>
+    </ul>
+    <header><b>Time Group (Hours)</b></header>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+    <p>	
+        The BW hours data contains a Time Type Code and Time Type Name. These Time Types are rolled up into a hierarchy of Time Types, which BW uses to organize hours recorded.
+        <br>
+        <img src="TimeType.PNG" alt="Time Type Codes and their hierarchy in BW">
+        <br>
+        <br>
+        The DLM performs a similar function and maps all Time Type Codes in BW to a Time Group. The process to build this mapping is complex and data used is pulled directly from SAP on a periodic basis.
+        Ultimately the mapping is based off the table below (tblTimeCode) in the DLM, which uses the higher levels of the Time Type hierarchy to map all Type Type Codes to a Time Group (TimeGrp). It also maps 
+        all Hours Worked to FT/PT/OT/TMP.
+    </p>
+        <TABLE>	
+            <caption>tblTimeCode</caption>
+            <tr>
+                <th>Time Type</th>
+                <th>TimeCodeSeq</th>
+                <th>TimeCode</th>
+                <th>TimeGrpSeq</th>
+                <th>TimeGrp</th>
+            </tr>
+            <tr>
+                <td>Full Time Hours</td>
+                <td>1</td>
+                <td>FT</td>
+                <td>1</td>
+                <td>Hr WK</td>
+            </tr>
+            <tr>
+                <td>Part Time Hours</td>
+                <td>2</td>
+                <td>PT</td>
+                <td>1</td>
+                <td>Hr WK</td>
+            </tr>
+            <tr>
+                <td>Term/Temporary Hours</td>
+                <td>3</td>
+                <td>Tmp</td>
+                <td>1</td>
+                <td>Hr WK</td>
+            </tr>
+            <tr>
+                <td>Overtime Hours</td>
+                <td>4</td>
+                <td>OT</td>
+                <td>1</td>
+                <td>Hr WK</td>
+            </tr>
+            <tr>
+                <td>Other Paid Attendance</td>
+                <td>5</td>
+                <td>Train/Oth</td>
+                <td>2</td>
+                <td>Train/Oth</td>
+            </tr>
+            <tr>
+                <td>Absenteeism (FT&PT)</td>
+                <td>6</td>
+                <td>PdAbs</td>
+                <td>3</td>
+                <td>PdAbs</td>
+            </tr>
+            <tr>
+                <td>Absenteeism - Other (FT & PT)</td>
+                <td>6</td>
+                <td>PdAbs</td>
+                <td>3</td>
+                <td>PdAbs</td>
+            </tr>
+            <tr>
+                <td>Other Absenteeism (Term and Term/Temp)</td>
+                <td>6</td>
+                <td>PdAbs</td>
+                <td>3</td>
+                <td>PdAbs</td>
+            </tr>
+            <tr>
+                <td>Vacation</td>
+                <td>7</td>
+                <td>Vacation</td>
+                <td>4</td>
+                <td>Vacation</td>
+            </tr>
+            <tr>
+                <td>Statutory Holiday</td>
+                <td>8</td>
+                <td>Stat</td>
+                <td>5</td>
+                <td>Stat</td>
+            </tr>
+        </TABLE>     
+        <br>
+        <br>
+        <TABLE>	 
+            <caption>Final Time Code Mapping</caption>
+            <tr>	<th>Time Type Code</th>	<th>Time Type Name</th>	<th>TimeCode</th>	<th>TimeGrp</th>	<th>TimeCodeOT</th>	<th>TimeGrpOT</th>	</tr>
+            <tr>	<td>T0013043</td>	<td>Approved Ext Hrs/OTime FT</td>	<td>FT</td>	<td>Hr WK</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0013060</td>	<td>Transformed O/T @ 1.5 FT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0013062</td>	<td>Transformed O/T @ 2.0 FT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0013098</td>	<td>Ttl Off'd Not Wrkd @ Reg FT</td>	<td>FT</td>	<td>Hr WK</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T00130TA</td>	<td>Portions @ Reg FT</td>	<td>FT</td>	<td>Hr WK</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019084</td>	<td>Modified Duties FT</td>	<td>FT</td>	<td>Hr WK</td>	<td>MDuties</td>	<td>MDuties</td>	</tr>
+            <tr>	<td>T0019085</td>	<td>Modified Duties FT</td>	<td>FT</td>	<td>Hr WK</td>	<td>MDuties</td>	<td>MDuties</td>	</tr>
+            <tr>	<td>T0019100</td>	<td>Regular Hours from PWS FT</td>	<td>FT</td>	<td>Hr WK</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019104</td>	<td>Hours/Paid DPH FT</td>	<td>Stat</td>	<td>Stat</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019236</td>	<td>Sick Uncertified Paid FT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019238</td>	<td>Sick Certified Paid FT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019240</td>	<td>Sick - Early Departure FT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019244</td>	<td>Vacation Taken FT</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019246</td>	<td>IOD Pending FT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019248</td>	<td>IOD FT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019252</td>	<td>Late - Paid FT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019254</td>	<td>Family Responsibilities FT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019258</td>	<td>NWL FT</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019260</td>	<td>Bereavement FT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019262</td>	<td>Special Paid Leave FT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019265</td>	<td>LJOSH Meetings FT</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019268</td>	<td>Floating Public Holiday FT</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019270</td>	<td>Disc/Susp - Paid FT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019274</td>	<td>Pre-Retirement FT</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019286</td>	<td>Court Leave FT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019298</td>	<td>Alternate Days in Lieu FT</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019310</td>	<td>Regular Hours FT</td>	<td>FT</td>	<td>Hr WK</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019312</td>	<td>Overtime FT</td>	<td>FT</td>	<td>Hr WK</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019314</td>	<td>Modified Duties FT</td>	<td>FT</td>	<td>Hr WK</td>	<td>MDuties</td>	<td>MDuties</td>	</tr>
+            <tr>	<td>T0019318</td>	<td>Travel betw Facilities FT</td>	<td>FT</td>	<td>Hr WK</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019322</td>	<td>Training FT</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019323</td>	<td>Trainer / Peer Mentor - FT</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019328</td>	<td>Grievances & Arbs FT</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019330</td>	<td>Other Union (CP Paid) FT</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019334</td>	<td>Telephone Call Back FT</td>	<td>FT</td>	<td>Hr WK</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019425</td>	<td>Work Option/Pay Deduction FT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019730</td>	<td>Pregnancy / Health Risk FT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019900</td>	<td>Personal Day - Planned FT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019901</td>	<td>Personal Day - Urgent FT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019903</td>	<td>Family-Related Resp. FT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019904</td>	<td>Birth/Adoption Leave FT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019906</td>	<td>STDP Pending - Illness FT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019907</td>	<td>STDP Pending - Acc/Hosp FT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019910</td>	<td>STDP Approved Pre-EI FT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019911</td>	<td>STDP Approved EI FT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019912</td>	<td>STDP Appeal Pre-EI FT </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019913</td>	<td>STDP Appeal EI FT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019914</td>	<td>Waiting Period Top-up FT </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019915</td>	<td>STDP Recurrence Pre-EI FT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0019916</td>	<td>STDP Recurrence EI FT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0023043</td>	<td>Approved Ext Hrs/OTime PT</td>	<td>PT</td>	<td>Hr WK</td>	<td>PT Ext</td>	<td>PT Ext</td>	</tr>
+            <tr>	<td>T0023060</td>	<td>Transformed O/T @ 1.5 PT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0023062</td>	<td>Transformed O/T @ 2.0 PT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0023098</td>	<td>Ttl Off'd Not Wrkd @ Reg PT</td>	<td>PT</td>	<td>Hr WK</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T00230TA</td>	<td>Portions @ Reg PT</td>	<td>PT</td>	<td>Hr WK</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029084</td>	<td>Modified Duties PT</td>	<td>PT</td>	<td>Hr WK</td>	<td>MDuties</td>	<td>MDuties</td>	</tr>
+            <tr>	<td>T0029085</td>	<td>Modified Duties PT</td>	<td>PT</td>	<td>Hr WK</td>	<td>MDuties</td>	<td>MDuties</td>	</tr>
+            <tr>	<td>T0029100</td>	<td>Regular Hours from PWS PT</td>	<td>PT</td>	<td>Hr WK</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029104</td>	<td>Hours/Paid DPH PT</td>	<td>Stat</td>	<td>Stat</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029236</td>	<td>Sick Uncertified Paid PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029238</td>	<td>Sick Certified Paid PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029240</td>	<td>Sick - Early Departure PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029244</td>	<td>Vacation Taken PT</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029246</td>	<td>IOD Pending PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029248</td>	<td>IOD PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029252</td>	<td>Late - Paid PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029254</td>	<td>Family Responsibilities PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029258</td>	<td>NWL PT</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029260</td>	<td>Bereavement PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029262</td>	<td>Special Paid Leave PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029265</td>	<td>LJOSH Meetings PT</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029268</td>	<td>Floating Public Holiday PT</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029270</td>	<td>Disc/Susp - Paid PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029274</td>	<td>Pre-Retirement PT</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029286</td>	<td>Court Leave PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029298</td>	<td>Alternate Days in Lieu PT</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029310</td>	<td>Regular Hours PT</td>	<td>PT</td>	<td>Hr WK</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029312</td>	<td>Overtime PT</td>	<td>PT</td>	<td>Hr WK</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029314</td>	<td>Modified Duties PT</td>	<td>PT</td>	<td>Hr WK</td>	<td>MDuties</td>	<td>MDuties</td>	</tr>
+            <tr>	<td>T0029318</td>	<td>Travel betw Facilities PT</td>	<td>PT</td>	<td>Hr WK</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029322</td>	<td>Training PT</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029323</td>	<td>Trainer / Peer Mentor - PT</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029328</td>	<td>Grievances & Arbs PT</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029330</td>	<td>Other Union (CP Paid) PT</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029334</td>	<td>Telephone Call Back PT</td>	<td>PT</td>	<td>Hr WK</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029425</td>	<td>Work Option/Pay Deduction PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029730</td>	<td>Pregnancy / Health Risk PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029900</td>	<td>Personal Day - Planned PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029901</td>	<td>Personal Day - Urgent PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029903</td>	<td>Family-Related Resp. PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029904</td>	<td>Birth/Adoption Leave PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029906</td>	<td>STDP Pending - Illness PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029907</td>	<td>STDP Pending - Acc/Hosp PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029910</td>	<td>STDP Approved Pre-EI PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029911</td>	<td>STDP Approved EI PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029912</td>	<td>STDP Appeal Pre-EI PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029913</td>	<td>STDP Appeal EI PT  </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029914</td>	<td>Waiting Period Top-up PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029915</td>	<td>STDP Recurrence Pre-EI PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0029916</td>	<td>STDP Recurrence EI PT</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0033043</td>	<td>Approved Ext Hrs/OTime TEMP</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0033060</td>	<td>Transformed O/T @ 1.5 TEMP</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0033062</td>	<td>Transformed O/T @ 2.0 TEMP</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0033098</td>	<td>Ttl Off'd Not Wrkd @ Reg TEMP</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T00330TA</td>	<td>Portions @ Reg TEMP</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0039084</td>	<td>Modified Duties TEMP</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0039085</td>	<td>Modified Duties TEMP</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0039100</td>	<td>Regular Hours from PWS TEMP</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0039104</td>	<td>Hours/Paid DPH TEMP</td>	<td>Stat</td>	<td>Stat</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039236</td>	<td>Sick Uncertified Paid TEMP</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039238</td>	<td>Sick Certified Paid TEMP</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039240</td>	<td>Sick - Early Departure TEMP</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039244</td>	<td>Vacation Taken TEMP</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039246</td>	<td>IOD Pending TEMP</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039248</td>	<td>IOD TEMP</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039252</td>	<td>Late - Paid TEMP</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039254</td>	<td>Family Responsibilities TEMP</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039258</td>	<td>NWL TEMP</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039260</td>	<td>Bereavement TEMP</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039262</td>	<td>Special Paid Leave TEMP</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039265</td>	<td>LJOSH Meetings TEMP</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039268</td>	<td>Floating Public Holiday TEMP</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039270</td>	<td>Disc/Susp - Paid TEMP</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039274</td>	<td>Pre-Retirement TEMP</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039286</td>	<td>Court Leave TEMP</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039298</td>	<td>Alternate Days in Lieu TEMP</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039310</td>	<td>Regular Hours TEMP</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0039312</td>	<td>Overtime TEMP</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0039314</td>	<td>Modified Duties TEMP</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0039318</td>	<td>Travel betw Facilities TEMP</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0039322</td>	<td>Training TEMP</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039323</td>	<td>Trainer / Peer Mentor - FT - Term</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039328</td>	<td>Grievances & Arbs TEMP</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039330</td>	<td>Other Union (CP Paid) TEMP</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039334</td>	<td>Telephone Call Back TEMP</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0039425</td>	<td>Work Option/Pay Deduction TEMP</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039900</td>	<td>Personal Day - Planned TEMP</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039901</td>	<td>Personal Day - Urgent TEMP</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039903</td>	<td>Family-Related Resp. TEMP</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039904</td>	<td>Birth/Adoption Leave TEMP</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039906</td>	<td>STDP Pending - Illness TEMP </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039907</td>	<td>STDP Pending - Acc/Hosp TEMP</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039910</td>	<td>STDP Approved Pre-EI TEMP</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039911</td>	<td>STDP Approved EI TEMP   </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039912</td>	<td>STDP Appeal Pre-EI TEMP  </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039913</td>	<td>STDP Appeal EI TEMP  </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039914</td>	<td>Waiting Period Top-up TEMP   </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039915</td>	<td>STDP Recurrence Pre-EI TEMP</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0039916</td>	<td>STDP Recurrence EI TEMP</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0043043</td>	<td>Approved Ext Hrs/OTime FT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0043060</td>	<td>Transformed O/T @ 1.5 FT-TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0043062</td>	<td>Transformed O/T @ 2.0 FT-TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0043098</td>	<td>Ttl Off'd Not Wrkd @ Reg FT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T00430TA</td>	<td>Portions @ Reg FT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0049084</td>	<td>Modified Duties FT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0049085</td>	<td>Modified Duties FT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0049100</td>	<td>Regular Hours from PWS FT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0049104</td>	<td>Hours/Paid DPH FT-TERM</td>	<td>Stat</td>	<td>Stat</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049236</td>	<td>Sick Uncertified Paid FT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049238</td>	<td>Sick Certified Paid FT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049240</td>	<td>Sick - Early Departure FT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049244</td>	<td>Vacation Taken FT-TERM</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049246</td>	<td>IOD Pending FT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049248</td>	<td>IOD FT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049252</td>	<td>Late - Paid FT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049254</td>	<td>Family Responsibilities FT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049258</td>	<td>NWL FT-TERM</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049260</td>	<td>Bereavement FT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049262</td>	<td>Special Paid Leave FT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049268</td>	<td>Floating Public Holiday FT-TERM</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049270</td>	<td>Disc/Susp - Paid FT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049274</td>	<td>Pre-Retirement FT-TERM</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049286</td>	<td>Court Leave FT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049298</td>	<td>Alternate Days in Lieu FT-TERM</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049310</td>	<td>Regular Hours FT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0049312</td>	<td>Overtime FT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0049314</td>	<td>Modified Duties FT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0049318</td>	<td>Travel betw Facilities FT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0049322</td>	<td>Training FT-TERM</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049323</td>	<td>Trainer / Peer Mentor - PT - Term</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049328</td>	<td>Grievances & Arbs FT-TERM</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049330</td>	<td>Other Union (CP Paid) FT-TERM</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049334</td>	<td>Telephone Call Back FT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0049425</td>	<td>Work Option/Pay Deduction FT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049900</td>	<td>Personal Day - Planned FT-TERM  </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049901</td>	<td>Personal Day - Urgent FT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049903</td>	<td>Family-Related Resp. FT-TERM </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049904</td>	<td>Birth/Adoption Leave FT-TERM </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049906</td>	<td>STDP Pending - Illness FT-TERM  </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049907</td>	<td>STDP Pending - Acc/Hosp FT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049910</td>	<td>STDP Approved Pre-EI FT-TERM </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049911</td>	<td>STDP Approved EI FT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049912</td>	<td>STDP Appeal Pre-EI FT-TERM </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049913</td>	<td>STDP Appeal EI FT-TERM </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049914</td>	<td>Waiting Period Top-up FT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049915</td>	<td>STDP Recurrence Pre-EI FT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0049916</td>	<td>STDP Recurrence EI FT-TERM </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0053043</td>	<td>Approved Ext Hrs/OTime PT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0053060</td>	<td>Transformed O/T @ 1.5 PT-TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0053062</td>	<td>Transformed O/T @ 2.0 PT-TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0053098</td>	<td>Ttl Off'd Not Wrkd @ Reg PT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T00530TA</td>	<td>Portions @ Reg PT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0059084</td>	<td>Modified Duties PT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0059085</td>	<td>Modified Duties PT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0059100</td>	<td>Regular Hours from PWS PT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0059104</td>	<td>Hours/Paid DPH PT-TERM</td>	<td>Stat</td>	<td>Stat</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059236</td>	<td>Sick Uncertified Paid PT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059238</td>	<td>Sick Certified Paid PT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059240</td>	<td>Sick - Early Departure PT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059244</td>	<td>Vacation Taken PT-TERM</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059246</td>	<td>IOD Pending PT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059248</td>	<td>IOD PT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059252</td>	<td>Late - Paid PT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059254</td>	<td>Family Responsibilities PT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059258</td>	<td>NWL PT-TERM</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059260</td>	<td>Bereavement PT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059262</td>	<td>Special Paid Leave PT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059265</td>	<td>LJOSH Meetings (CP Paid) PT-TERM</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059268</td>	<td>Floating Public Holiday PT-TERM</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059270</td>	<td>Disc/Susp - Paid PT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059274</td>	<td>Pre-Retirement PT-TERM</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059286</td>	<td>Court Leave PT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059298</td>	<td>Alternate Days in Lieu PT-TERM</td>	<td>Vacation</td>	<td>Vacation</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059310</td>	<td>Regular Hours PT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0059312</td>	<td>Overtime PT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0059314</td>	<td>Modified Duties PT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0059318</td>	<td>Travel betw Facilities PT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0059322</td>	<td>Training PT-TERM</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059323</td>	<td>Trainer / Peer Mentor - Temp</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059328</td>	<td>Grievances & Arbs PT-TERM</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059330</td>	<td>Other Union (CP Paid) PT-TERM</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059334</td>	<td>Telephone Call Back PT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>T0059425</td>	<td>Work Option/Pay Deduction PT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059900</td>	<td>Personal Day - Planned PT-TERM </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059901</td>	<td>Personal Day - Urgent PT-TERM </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059903</td>	<td>Family-Related Resp. PT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059904</td>	<td>Birth/Adoption Leave PT-TERM </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059906</td>	<td>STDP Pending - Illness PT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059907</td>	<td>STDP Pending - Acc/Hosp PT-TERM </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059910</td>	<td>STDP Approved Pre-EI PT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059911</td>	<td>STDP Approved EI PT-TERM</td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059912</td>	<td>STDP Appeal Pre-EI PT-TERM  </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059913</td>	<td>STDP Appeal EI PT-TERM   </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059914</td>	<td>Waiting Period Top-up PT-TERM </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059915</td>	<td>STDP Recurrence Pre-EI PT-TERM </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>T0059916</td>	<td>STDP Recurrence EI PT-TERM </td>	<td>PdAbs</td>	<td>PdAbs</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>U0013060</td>	<td>Missed OT @ 1.5 (comp) FT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0013062</td>	<td>Missed OT @ 2.0 (comp) FT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0016010</td>	<td>Missed OT @ 1.5 FT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0016015</td>	<td>Missed OT @ 2.0 FT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0016018</td>	<td>Missed OT @ 1.0 FT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0019673</td>	<td>Missed OT @ 1.5 (comp) FT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0019674</td>	<td>Missed OT @ 2.0 (comp) FT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0023060</td>	<td>Missed OT @ 1.5 (comp) PT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0023062</td>	<td>Missed OT @ 2.0 (comp) PT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0026010</td>	<td>Missed OT @ 1.5 PT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0026015</td>	<td>Missed OT @ 2.0 PT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0026018</td>	<td>Missed OT @ 1.0 PT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0029673</td>	<td>Missed OT @ 1.5 (comp) PT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0029674</td>	<td>Missed OT @ 2.0 (comp) PT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0033060</td>	<td>Missed OT @ 1.5 (comp) TEMP</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0033062</td>	<td>Missed OT @ 2.0 (comp) TEMP</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0036010</td>	<td>Missed OT @ 1.5 TEMP</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0036015</td>	<td>Missed OT @ 2.0 TEMP</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0036018</td>	<td>Missed OT @ 1.0 TEMP</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0039673</td>	<td>Missed OT @ 1.5 (comp) TEMP</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0039674</td>	<td>Missed OT @ 2.0 (comp) TEMP</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0043060</td>	<td>Missed OT @ 1.5 (comp) FT-TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0043062</td>	<td>Missed OT @ 2.0 (comp) FT-TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0046010</td>	<td>Missed OT @ 1.5 FT-TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0046015</td>	<td>Missed OT @ 2.0 FT-TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0046018</td>	<td>Missed OT @ 1.0 FT-TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0049673</td>	<td>Missed OT @ 1.5 (comp) FT - TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0049674</td>	<td>Missed OT @ 2.0 (comp) FT - TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0053060</td>	<td>Missed OT @ 1.5 (comp) PT-TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0053062</td>	<td>Missed OT @ 2.0 (comp) PT-TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0056010</td>	<td>Missed OT @ 1.5 PT-TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0056015</td>	<td>Missed OT @ 2.0 PT-TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0056018</td>	<td>Missed OT @ 1.0 PT-TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0059673</td>	<td>Missed OT @ 1.5 (comp) PT - TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>U0059674</td>	<td>Missed OT @ 2.0 (comp) PT - TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0016010</td>	<td>Overtime @ 1.5 FT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0016015</td>	<td>Overtime @ 2.0 FT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0016018</td>	<td>Overtime @ 1.0 FT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0019673</td>	<td>Transformed O/T @ 1.5 FT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0019674</td>	<td>Transformed O/T @ 2.0 FT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0026010</td>	<td>Overtime @ 1.5 PT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0026015</td>	<td>Overtime @ 2.0 PT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0026018</td>	<td>Overtime @ 1.0 PT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0029673</td>	<td>Transformed O/T @ 1.5 PT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0029674</td>	<td>Transformed O/T @ 2.0 PT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0036010</td>	<td>Overtime @ 1.5 TEMP</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0036015</td>	<td>Overtime @ 2.0 TEMP</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0036018</td>	<td>Overtime @ 1.0 TEMP</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0039673</td>	<td>Transformed O/T @ 1.5 TEMP</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0039674</td>	<td>Transformed O/T @ 2.0 TEMP</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0046010</td>	<td>Overtime @ 1.5 FT-TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0046015</td>	<td>Overtime @ 2.0 FT-TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0046018</td>	<td>Overtime @ 1.0 FT-TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0049673</td>	<td>Transformed O/T @ 1.5 FT - TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0049674</td>	<td>Transformed O/T @ 2.0 FT - TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0056010</td>	<td>Overtime @ 1.5 PT-TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0056015</td>	<td>Overtime @ 2.0 PT-TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0056018</td>	<td>Overtime @ 1.0 PT-TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0059673</td>	<td>Transformed O/T @ 1.5 PT - TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>W0059674</td>	<td>Transformed O/T @ 2.0 PT - TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>WC01OR15</td>	<td>Overtime @ 1.5 Excluding Portions FT</td>	<td></td>	<td></td>	<td>OT Ex Prtn</td>	<td>OT Ex Prtn</td>	</tr>
+            <tr>	<td>WC01OR20</td>	<td>Overtime @ 2.0 Excluding Portions FT</td>	<td></td>	<td></td>	<td>OT Ex Prtn</td>	<td>OT Ex Prtn</td>	</tr>
+            <tr>	<td>WC01OT15</td>	<td>Overtime @ 1.5 Other Route FT</td>	<td></td>	<td></td>	<td>OT Oth Rte</td>	<td>OT Oth Rte</td>	</tr>
+            <tr>	<td>WC01OT20</td>	<td>Overtime @ 2.0 Other Route FT</td>	<td></td>	<td></td>	<td>OT Oth Rte</td>	<td>OT Oth Rte</td>	</tr>
+            <tr>	<td>WC02OR15</td>	<td>Overtime @ 1.5 Excluding Portions PT</td>	<td></td>	<td></td>	<td>OT Ex Prtn</td>	<td>OT Ex Prtn</td>	</tr>
+            <tr>	<td>WC02OR20</td>	<td>Overtime @ 2.0 Excluding Portions PT</td>	<td></td>	<td></td>	<td>OT Ex Prtn</td>	<td>OT Ex Prtn</td>	</tr>
+            <tr>	<td>WC02OT15</td>	<td>Overtime @ 1.5 Other Route PT</td>	<td></td>	<td></td>	<td>OT Oth Rte</td>	<td>OT Oth Rte</td>	</tr>
+            <tr>	<td>WC02OT20</td>	<td>Overtime @ 2.0 Other Route PT</td>	<td></td>	<td></td>	<td>OT Oth Rte</td>	<td>OT Oth Rte</td>	</tr>
+            <tr>	<td>WC03OR15</td>	<td>Overtime @ 1.5 Excluding Portions TEMP</td>	<td></td>	<td></td>	<td>OT Ex Prtn</td>	<td>OT Ex Prtn</td>	</tr>
+            <tr>	<td>WC03OR20</td>	<td>Overtime @ 2.0 Excluding Portions TEMP</td>	<td></td>	<td></td>	<td>OT Ex Prtn</td>	<td>OT Ex Prtn</td>	</tr>
+            <tr>	<td>WC03OT15</td>	<td>Overtime @ 1.5 Other Route TEMP</td>	<td></td>	<td></td>	<td>OT Oth Rte</td>	<td>OT Oth Rte</td>	</tr>
+            <tr>	<td>WC03OT20</td>	<td>Overtime @ 2.0 Other Route TEMP</td>	<td></td>	<td></td>	<td>OT Oth Rte</td>	<td>OT Oth Rte</td>	</tr>
+            <tr>	<td>WC04OR15</td>	<td>Overtime @ 1.5 Excluding Portions FT-TERM</td>	<td></td>	<td></td>	<td>OT Ex Prtn</td>	<td>OT Ex Prtn</td>	</tr>
+            <tr>	<td>WC04OR20</td>	<td>Overtime @ 2.0 Excluding Portions FT-TERM</td>	<td></td>	<td></td>	<td>OT Ex Prtn</td>	<td>OT Ex Prtn</td>	</tr>
+            <tr>	<td>WC04OT15</td>	<td>Overtime @ 1.5 Other Route FT-TERM</td>	<td></td>	<td></td>	<td>OT Oth Rte</td>	<td>OT Oth Rte</td>	</tr>
+            <tr>	<td>WC04OT20</td>	<td>Overtime @ 2.0 Other Route FT-TERM</td>	<td></td>	<td></td>	<td>OT Oth Rte</td>	<td>OT Oth Rte</td>	</tr>
+            <tr>	<td>WC05OR15</td>	<td>Overtime @ 1.5 Excluding Portions PT-TERM</td>	<td></td>	<td></td>	<td>OT Ex Prtn</td>	<td>OT Ex Prtn</td>	</tr>
+            <tr>	<td>WC05OR20</td>	<td>Overtime @ 2.0 Excluding Portions PT-TERM</td>	<td></td>	<td></td>	<td>OT Ex Prtn</td>	<td>OT Ex Prtn</td>	</tr>
+            <tr>	<td>WC05OT15</td>	<td>Overtime @ 1.5 Other Route PT-TERM</td>	<td></td>	<td></td>	<td>OT Oth Rte</td>	<td>OT Oth Rte</td>	</tr>
+            <tr>	<td>WC05OT20</td>	<td>Overtime @ 2.0 Other Route PT-TERM</td>	<td></td>	<td></td>	<td>OT Oth Rte</td>	<td>OT Oth Rte</td>	</tr>
+            <tr>	<td>WLB100IN</td>	<td>Loans and Borrows IN FT</td>	<td>FT</td>	<td>Hr WK</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>WLB10OUT</td>	<td>Loans and Borrows OUT FT</td>	<td>FT</td>	<td>Hr WK</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>WLB1O0IN</td>	<td>Loans and Borrows OT @All IN FT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>WLB1OOUT</td>	<td>Loans and Borrows OT @All OUT FT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>WLB200IN</td>	<td>Loans and Borrows IN PT</td>	<td>PT</td>	<td>Hr WK</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>WLB20OUT</td>	<td>Loans and Borrows OUT PT</td>	<td>PT</td>	<td>Hr WK</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>WLB2O0IN</td>	<td>Loans and Borrows OT @All IN PT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>WLB2OOUT</td>	<td>Loans and Borrows OT @All OUT PT</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>WLB300IN</td>	<td>Loans and Borrows IN TEMP</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>WLB30OUT</td>	<td>Loans and Borrows OUT TEMP</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>WLB3O0IN</td>	<td>Loans and Borrows OT @All IN TEMP</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>WLB3OOUT</td>	<td>Loans and Borrows OT @All OUT TEMP</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>WLB400IN</td>	<td>Loans and Borrows IN FT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>WLB40OUT</td>	<td>Loans and Borrows OUT FT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>WLB4O0IN</td>	<td>Loans and Borrows OT @All IN FT-TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>WLB4OOUT</td>	<td>Loans and Borrows OT @All OUT FT-TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>WLB500IN</td>	<td>Loans and Borrows IN PT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>WLB50OUT</td>	<td>Loans and Borrows OUT PT-TERM</td>	<td>Tmp</td>	<td>Hr WK</td>	<td>Tmp</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>WLB5O0IN</td>	<td>Loans and Borrows OT @All IN PT-TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>WLB5OOUT</td>	<td>Loans and Borrows OT @All OUT PT-TERM</td>	<td>OT</td>	<td>Hr WK</td>	<td>OT</td>	<td>Hr WK</td>	</tr>
+            <tr>	<td>WTB100IN</td>	<td>Loans and Borrows OT @All IN FT</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>WTB10OUT</td>	<td>Loans and Borrows OT @All OUT FT</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>WTB200IN</td>	<td>Loans and Borrows OT @All IN PT</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>WTB20OUT</td>	<td>Loans and Borrows OT @All OUT PT</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>WTB300IN</td>	<td>Loans and Borrows OT @All IN TEMP</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>WTB30OUT</td>	<td>Loans and Borrows OT @All OUT TEMP</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>WTB400IN</td>	<td>Loans and Borrows OT @All IN FT-TERM</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>WTB40OUT</td>	<td>Loans and Borrows OT @All OUT FT-TERM</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>WTB500IN</td>	<td>Loans and Borrows OT @All IN PT-TERM</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+            <tr>	<td>WTB50OUT</td>	<td>Loans and Borrows OT @All OUT PT-TERM</td>	<td>Train/Oth</td>	<td>Train/Oth</td>	<td></td>	<td></td>	</tr>
+        </TABLE>
+</body>
+</html>

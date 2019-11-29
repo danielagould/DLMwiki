@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <ul>
+        <li><b>Direct Labour Model Methodology</b></li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Drivers</a>
+            <div class="dropdown-content">
+                <a href="../Driver/Driver_MP.html">Mail processing</a>
+                <a href="../Driver/Driver_CD.html">Collection & Delivery</a>
+                <a href="../Driver/Driver_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Dollars Matrix</a>
+            <div class="dropdown-content">
+                <a href="../Dollars/DollarMatrix_MP.html">Mail processing</a>
+                <a href="../Dollars/DollarMatrix_CD.html">Collection & Delivery</a>
+                <a href="../Dollars/DollarMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Hours Matrix</a>
+            <div class="dropdown-content">
+                <a href="../Hours/HourMatrix_MP.html">Mail processing</a>
+                <a href="../Hours/HourMatrix_CD.html">Collection & Delivery</a>
+                <a href="../Hours/HourMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Reference</a>
+            <div class="dropdown-content">
+                <a href="../Reference/ActGrp.html">Act Group</a>
+                <a href="../Reference/Adjustments.html">Adjustments</a>
+                <a href="../Reference/AllocationRates.html">Allocation Rates</a>
+                <a href="../Reference/Dollars.html">BW Dollars</a>
+                <a href="../Reference/GLCEGrp_Dollars.html">GLCE Group (Dollars)</a>
+                <a href="../Reference/GLCEGrp_Hours.html">GLCE Group (Hours)</a>
+                <a href="../Reference/Hours.html">BW Hours</a>
+                <a href="../Reference/HoursNonHoursSplit.html">Hours v Non Hours Related</a>
+                <a href="../Reference/LYPaidRate.html">LY Paid Rate</a>
+                <a href="../Reference/Plant_NonPlant.html">Plant v Non Plant</a>
+                <a href="../Reference/TimeGroup_Dollars.html">Time Group (Dollars)</a>
+                <a href="../Reference/TimeGroup_Hours.html">Time Group (Hours)</a>
+                <a href="../Reference/WageIncrease.html">Wage Increase</a>
+            </div>
+        </li>
+    </ul>
+    <header><b>Dollars Hours vs Non Hours Split</b></header>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+    <p>	
+        All dollar data in the DLM is <i>labour related</i> but some of it is not directly tied to a payable hour (either worked or some for of paid absence).
+        Dollars directly tied to a paid hour are referred to as <b>Hours Related</b> and all other dollars are <b>Non Hours Related</b>.
+        <br>
+        <br>
+        Examples of non hours related entries are: Boot & Glove, Rest Period, and various Allowances.
+        <br>
+        <br>
+        The mapping is done using the <i>T002 - GLCE</i> table in the DLM, which maps each <a href="GLCEGrp_Dollars.html">GLCEGrp</a> to either
+        Hours Related or Non Hours Related.
+    </p>
+    <TABLE>
+        <caption>GLCEGrp to Hours or Non Hours Mapping</caption>
+        <tr>
+            <th>GLCEGrp</th>
+            <th>Hours vs Non Hours Related (DLM notation)</th>
+        </tr>
+        <tr>
+            <td>FT</td>
+            <td>Hours Related (hrs related)</td>
+        </tr>
+        <tr>
+            <td>PT</td>
+            <td>Hours Related (hrs related)</td>
+        </tr>
+        <tr>
+            <td>RSMC</td>
+            <td>Hours Related (hrs related)</td>
+        </tr>
+        <tr>
+            <td>Tmp</td>
+            <td>Hours Related (hrs related)</td>
+        </tr>
+        <tr>
+            <td>OT</td>
+            <td>Hours Related (hrs related)</td>
+        </tr>
+        <tr>
+            <td>NonHrs</td>
+            <td>Non Hours Related (others)</td>
+        </tr>
+        <tr>
+            <td>HH Bonus</td>
+            <td>Non Hours Related (others)</td>
+        </tr>
+        <tr>
+            <td>Route</td>
+            <td>Non Hours Related (others)</td>
+        </tr>
+        <tr>
+            <td>OthAllw</td>
+            <td>Non Hours Related (others)</td>
+        </tr>
+        <tr>
+            <td>OthLab</td>
+            <td>Non Hours Related (others)</td>
+        </tr>
+        <tr>
+            <td>Rest&BG</td>
+            <td>Non Hours Related (others)</td>
+        </tr>
+        <tr>
+            <td>STDP</td>
+            <td>Non Hours Related (others)</td>
+        </tr>                        
+    </table>
+</body>
+</html>

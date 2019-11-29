@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <ul>
+        <li><b>Direct Labour Model Methodology</b></li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Drivers</a>
+            <div class="dropdown-content">
+                <a href="../Driver/Driver_MP.html">Mail processing</a>
+                <a href="../Driver/Driver_CD.html">Collection & Delivery</a>
+                <a href="../Driver/Driver_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Dollars Matrix</a>
+            <div class="dropdown-content">
+                <a href="../Dollars/DollarMatrix_MP.html">Mail processing</a>
+                <a href="../Dollars/DollarMatrix_CD.html">Collection & Delivery</a>
+                <a href="../Dollars/DollarMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Hours Matrix</a>
+            <div class="dropdown-content">
+                <a href="../Hours/HourMatrix_MP.html">Mail processing</a>
+                <a href="../Hours/HourMatrix_CD.html">Collection & Delivery</a>
+                <a href="../Hours/HourMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Reference</a>
+            <div class="dropdown-content">
+                <a href="../Reference/ActGrp.html">Act Group</a>
+                <a href="../Reference/Adjustments.html">Adjustments</a>
+                <a href="../Reference/AllocationRates.html">Allocation Rates</a>
+                <a href="../Reference/Dollars.html">BW Dollars</a>
+                <a href="../Reference/GLCEGrp_Dollars.html">GLCE Group (Dollars)</a>
+                <a href="../Reference/GLCEGrp_Hours.html">GLCE Group (Hours)</a>
+                <a href="../Reference/Hours.html">BW Hours</a>
+                <a href="../Reference/HoursNonHoursSplit.html">Hours v Non Hours Related</a>
+                <a href="../Reference/LYPaidRate.html">LY Paid Rate</a>
+                <a href="../Reference/Plant_NonPlant.html">Plant v Non Plant</a>
+                <a href="../Reference/TimeGroup_Dollars.html">Time Group (Dollars)</a>
+                <a href="../Reference/TimeGroup_Hours.html">Time Group (Hours)</a>
+                <a href="../Reference/WageIncrease.html">Wage Increase</a>
+            </div>
+        </li>
+    </ul>
+    <header><b>GLCE Group (Hours)</b></header>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+    <p>
+        The GLCE Group is the hour type for each hour work, whether Full Time (FT), Part Time (PT), Temporary (TMP) or Overtime (OT).
+        <br>
+        <br>
+        For the Time Group <b>Hours Worked (Hr Wk)</b> the GLCE Group is determined using the tblTimeCode table mapping 
+        (see the <a href="TimeGroup_Hours.html">Time Group</a> methodology).
+        <br>
+        <br>
+        For the non Hours Worked Time Groups the Employee SubGroup is used to map the hours to a GLCE Grp. This info is found in the 
+        tblEESubGrp table (see below). The Employee SubGroup is a field available in the 9502 and is pulled into the DLM (see 
+        the <a href="Hours.html">Hours</a> methodology)
+        <br>
+        <br>
+    </p>
+    <TABLE>	 
+        <tr>
+            <th>EE_Subgrp_Num</th>
+            <th>EE_Subgrp_Name</th>
+            <th>GLCEGrp</th>
+        </tr>
+        <tr>
+            <td>7A</td>
+            <td>CP Regular Full-time</td>
+            <td>FT</td>
+        </tr>
+        <tr>
+            <td>7F</td>
+            <td>CP Temporary(CUPW)</td>
+            <td>Tmp</td>
+        </tr>
+        <tr>
+            <td>7B</td>
+            <td>CP Regular Part-time</td>
+            <td>PT</td>
+        </tr>
+        <tr>
+            <td>7D</td>
+            <td>CP Term Part-time</td>
+            <td>Tmp</td>
+        </tr>
+        <tr>
+            <td>7C</td>
+            <td>CP Term Full-time</td>
+            <td>Tmp</td>
+        </tr>                      
+    </TABLE>
+</body>        
+</html>                

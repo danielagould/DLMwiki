@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <ul>
+        <li><b>Direct Labour Model Methodology</b></li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Drivers</a>
+            <div class="dropdown-content">
+                <a href="../Driver/Driver_MP.html">Mail processing</a>
+                <a href="../Driver/Driver_CD.html">Collection & Delivery</a>
+                <a href="../Driver/Driver_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Dollars Matrix</a>
+            <div class="dropdown-content">
+                <a href="../Dollars/DollarMatrix_MP.html">Mail processing</a>
+                <a href="../Dollars/DollarMatrix_CD.html">Collection & Delivery</a>
+                <a href="../Dollars/DollarMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Hours Matrix</a>
+            <div class="dropdown-content">
+                <a href="../Hours/HourMatrix_MP.html">Mail processing</a>
+                <a href="../Hours/HourMatrix_CD.html">Collection & Delivery</a>
+                <a href="../Hours/HourMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Reference</a>
+            <div class="dropdown-content">
+                <a href="../Reference/ActGrp.html">Act Group</a>
+                <a href="../Reference/Adjustments.html">Adjustments</a>
+                <a href="../Reference/AllocationRates.html">Allocation Rates</a>
+                <a href="../Reference/Dollars.html">BW Dollars</a>
+                <a href="../Reference/GLCEGrp_Dollars.html">GLCE Group (Dollars)</a>
+                <a href="../Reference/GLCEGrp_Hours.html">GLCE Group (Hours)</a>
+                <a href="../Reference/Hours.html">BW Hours</a>
+                <a href="../Reference/HoursNonHoursSplit.html">Hours v Non Hours Related</a>
+                <a href="../Reference/LYPaidRate.html">LY Paid Rate</a>
+                <a href="../Reference/Plant_NonPlant.html">Plant v Non Plant</a>
+                <a href="../Reference/TimeGroup_Dollars.html">Time Group (Dollars)</a>
+                <a href="../Reference/TimeGroup_Hours.html">Time Group (Hours)</a>
+                <a href="../Reference/WageIncrease.html">Wage Increase</a>
+            </div>
+        </li>
+    </ul>
+    <header><b>Paid Leave Allocation & Allowance Rates (T008 Table)</b></header>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+        <p>
+            A certain portion of any paid leave (Vacation, Stat, etc) is attributed to the increase (decrease) 
+            in total hours worked. The percentage of the change in hours worked that is attributed to paid absences is a fixed rate found in the T008 table.
+            <br>
+            <br>
+            These rates are multiplied by the YOY Hours Worked (Time Group Hr Wk) to yield the Leave Hours Worked 
+            columns in the DLM. This amount is also subtracted from the straight Absence Hours. 
+            This gives a clearer picture of the YOY paid leave by showing only change in behaviour related to absences and not a change in the base hours worked.
+            <br>
+            <br>
+            The table gives the rates per <a href="ActGrp.html">Act Group</a>, and per <a href="GLCEGrp_Hours.html">GLCE Group Name</a> (see below).
+            The T110 also uses the same <a href="ActGrp.html">Act Sub Group</a>.
+            <br>
+            <br>
+            This table also contains the Allowances rates, which are values that when mulitplied by the change in hours worked, 
+            yields a dollar impact.
+            <br>
+            <br>
+            The adjustments are filterable by:
+            <ul class="filterlist">
+                    <li class="filterlist"><i>ActGroup</i></li>
+                    <li class="filterlist"><i>GLCEGrp</i></li>
+                    <li class="filterlist"><i>Allocation Time Type</i></li>
+            </ul>   
+        </p>
+        <TABLE>
+                <caption>Example of T008 Table</caption>	
+                <tr>	
+                        <th>ActGroup</th>	
+                        <th>GLCEGroup</th>	
+                        <th>PdAbs %</th>	
+                        <th>Vacation %</th>	
+                        <th>Train/Oth %</th>
+                        <th>Stat %</th>
+                        <th>Allowances Rate</th>		
+                </tr>
+                <tr>	
+                        <td>MP</td>	
+                        <td>FT</td>	
+                        <td>0.112</td>	
+                        <td>0.159</td>	
+                        <td>0</td>
+                        <td>0.044</td>	
+                        <td>1.247</td>		
+                </tr>
+                <tr>	
+                        <td>MP</td>	
+                        <td>PT</td>	
+                        <td>0.074</td>	
+                        <td>0.085</td>	
+                        <td>0</td>
+                        <td>0.044</td>
+                        <td>1.358</td>		
+                </tr>
+                <tr>	
+                        <td>MP</td>	
+                        <td>TMP</td>	
+                        <td>0</td>	
+                        <td>0</td>	
+                        <td>0</td>
+                        <td>0.044</td>		
+                        <td>2.023</td>
+                </tr>
+                <tr>	
+                        <td>MP</td>	
+                        <td>OT</td>	
+                        <td>0</td>	
+                        <td>0</td>	
+                        <td>0</td>
+                        <td>0</td>		
+                        <td>0</td>
+                </tr>
+                <tr>	
+                        <td>CD</td>	
+                        <td>FT</td>	
+                        <td>0.115</td>	
+                        <td>0.128</td>	
+                        <td>0</td>
+                        <td>0.044</td>	
+                        <td>1.006</td>	
+                </tr>
+                <tr>	
+                        <td>CD</td>	
+                        <td>PT</td>	
+                        <td>0.063</td>	
+                        <td>0.068</td>	
+                        <td>0</td>
+                        <td>0.044</td>		
+                        <td>1.071</td>
+                </tr>
+                <tr>	
+                        <td>CD</td>	
+                        <td>TMP</td>	
+                        <td>0</td>	
+                        <td>0</td>	
+                        <td>0</td>
+                        <td>0.044</td>		
+                        <td>2.116</td>
+                </tr>
+                <tr>	
+                        <td>CD</td>	
+                        <td>OT</td>	
+                        <td>0</td>	
+                        <td>0</td>	
+                        <td>0</td>
+                        <td>0</td>		
+                        <td>0</td>
+                </tr>
+                <tr>	
+                        <td>CO</td>	
+                        <td>FT</td>	
+                        <td>0.080</td>	
+                        <td>0.123</td>	
+                        <td>0</td>
+                        <td>0.044</td>	
+                        <td>0.094</td>	
+                </tr>
+                <tr>	
+                        <td>CO</td>	
+                        <td>PT</td>	
+                        <td>0.046</td>	
+                        <td>0.061</td>	
+                        <td>0</td>
+                        <td>0.044</td>		
+                        <td>0.119</td>
+                </tr>
+                <tr>	
+                        <td>CO</td>	
+                        <td>TMP</td>	
+                        <td>0</td>	
+                        <td>0</td>	
+                        <td>0</td>
+                        <td>0.044</td>		
+                        <td>0.209</td>
+                </tr>
+                <tr>	
+                        <td>CO</td>	
+                        <td>OT</td>	
+                        <td>0</td>	
+                        <td>0</td>	
+                        <td>0</td>
+                        <td>0</td>		
+                        <td>0</td>
+                </tr>
+        </table>
+</body>
+</html>
