@@ -1,428 +1,168 @@
 <!DOCTYPE html>
 <html>
-<header>
+<head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-  <font face="Cambria" size ="5">
-    <b>GM Matrix - YOY Hours</b>
-  </font>
-  <br>
-</header>
+    <ul>
+        <li><b>Direct Labour Model Methodology</b></li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Drivers</a>
+            <div class="dropdown-content">
+                <a href="../Driver/Driver_MP.html">Mail processing</a>
+                <a href="../Driver/Driver_CD.html">Collection & Delivery</a>
+                <a href="../Driver/Driver_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Dollars Matrix</a>
+            <div class="dropdown-content">
+                <a href="../Dollars/DollarMatrix_MP.html">Mail processing</a>
+                <a href="../Dollars/DollarMatrix_CD.html">Collection & Delivery</a>
+                <a href="../Dollars/DollarMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Hours Matrix</a>
+            <div class="dropdown-content">
+                <a href="../Hours/HourMatrix_MP.html">Mail processing</a>
+                <a href="../Hours/HourMatrix_CD.html">Collection & Delivery</a>
+                <a href="../Hours/HourMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+          <a href="javascript:void(0)" class="dropbtn">Reference</a>
+          <div class="dropdown-content">
+              <a href="../Reference/ActGrp.html">Act Group</a>
+              <a href="../Reference/Adjustments.html">Adjustments</a>
+              <a href="../Reference/AllocationRates.html">Allocation Rates</a>
+              <a href="../Reference/Dollars.html">BW Dollars</a>
+              <a href="../Reference/GLCEGrp_Dollars.html">GLCE Group (Dollars)</a>
+              <a href="../Reference/GLCEGrp_Hours.html">GLCE Group (Hours)</a>
+              <a href="../Reference/Hours.html">BW Hours</a>
+              <a href="../Reference/HoursNonHoursSplit.html">Hours v Non Hours Related</a>
+              <a href="../Reference/LYPaidRate.html">LY Paid Rate</a>
+              <a href="../Reference/Plant_NonPlant.html">Plant v Non Plant</a>
+              <a href="../Reference/TimeGroup_Dollars.html">Time Group (Dollars)</a>
+              <a href="../Reference/TimeGroup_Hours.html">Time Group (Hours)</a>
+              <a href="../Reference/WageIncrease.html">Wage Increase</a>
+          </div>
+      </li>
+    </ul>
+    <header><b>YOY Hours Matrix</b></header>
+    <header class="style2"><b>Counter Operations</b></header>
+    <link rel="stylesheet" href="../style.css" />
+</head>
 <body>
-  <font face="Cambria" size ="2">
-    <i><a href="../Dollars/GMMatrix_Dollars.html">Go to YOY Dollars</a></i>
-  </font>
-  <br>
-  <br>
-  <!--Mail Processing Table-->
-  <font face="Arial" size ="3">
-    <b>MAIL PROCESSING</b>
-  </font>
-  <br>
-  <font face="Cambria" size ="2">
-    <TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0">																			
+  <font size ="2">
+    <TABLE>																			
       <tr>
-        <td width = "200" align="center"> <b>YOY Hours</b>  </td> 
-        <td width = "100" align="center"> Plant (Hours Worked)  </td> 
-        <td width = "100" align="center"> Non Plant (Hours Worked)  </td> 
-        <td width = "100" align="center"> Volume / Mix  </td> 
-        <td width = "100" align="center"> Investments </td> 
-        <td width = "100" align="center"> Reorg & Coding  </td> 
-        <td width = "100" align="center"> Absences  </td>
-        <td width = "100" align="center"> Vacation  </td>
-        <td width = "100" align="center"> Training & Union Leaves </td> 
-        <td width = "100" align="center"> Stat Holidays </td>
-        <td width = "100" align="center"> Total Hours Related </td>
-        <td width = "100" align="center"> Residual Rate & Allowances  </td>
-        <td width = "100" align="center"> Timing - Non Hour Related </td>
-        <td width = "100" align="center"> Wage Increase </td>
-        <td width = "100" align="center"> Total Rate Related  </td>
-        <td width = "100" align="center"> Trade Days Adjusted </td>
-        <td width = "100" align="center"> Days Adjustment </td>
-        <td width = "100" align="center"> Total YOY </td> 
+        <th class="style2"> </th> 
+        <th class="style2"> Retail Hours  </th> 
+        <th class="style2"> Retail Initiatives</th> 
+        <th class="style2"> Absences  </th>
+        <th class="style2"> Vacation  </th>
+        <th class="style2"> Reorg & Coding  </th> 
+        <th class="style2"> Training & Union Leaves </th> 
+        <th class="style2"> Stat Holidays </th>
+        <th class="style2"> Total Hours Related </th>
+        <th class="style2"> Residual Rate & Allowances  </th>
+        <th class="style2"> Timing - Non Hour Related </th>
+        <th class="style2"> Wage Increase </th>
+        <th class="style2"> Total Rate Related  </th>
+        <th class="style2"> Trade Days Adjusted </th>
+        <th class="style2"> Days Adjustment </th>
+        <th class="style2"> Total YOY </th> 
       </tr>
       <tr>  
-        <td width = "200" align="right">  Hours Worked  </td> 
-        <td align="center"><i><a href="MP/HoursWorked/H_MP_HrWk_PlantHW.html">link</a></i></td>
-        <td align="center"><i><a href="MP/HoursWorked/H_MP_HrWk_NPHW.html">link</a></i></td>
+        <td>  Hours Worked  </td> 
+        <td><i><a href="CO/HoursWorked/H_CO_HrWk_RetailHrs.html">link</a></i></td>
+        <td><i><a href="CO/HoursWorked/H_CO_HrWk_RetailInit.html">link</a></i></td>
         <td bgcolor="#D3D3D3">	</td>	
         <td bgcolor="#D3D3D3">	</td>	
-        <td align="center"><i><a href="MP/HoursWorked/H_MP_HrWk_Reorg.html">link</a></i></td>
+        <td><i><a href="CO/HoursWorked/H_CO_HrWk_Reorg.html">link</a></i></td>
         <td bgcolor="#D3D3D3">	</td>	
         <td bgcolor="#D3D3D3">	</td>	
-        <td bgcolor="#D3D3D3">	</td>	
-        <td bgcolor="#D3D3D3">	</td>	
-        <td align="center"><i><a href="MP/HoursWorked/H_MP_HrWk_HrsRelated.html">link</a></i></td>
+        <td><i><a href="CO/HoursWorked/H_CO_HrWk_HrsRelated.html">link</a></i></td>
         <td bgcolor="#D3D3D3">	</td>	
         <td bgcolor="#D3D3D3">	</td>	
         <td bgcolor="#D3D3D3">	</td>	
         <td bgcolor="#D3D3D3">	</td>	
-        <td align="center"><i><a href="MP/HoursWorked/H_MP_HrWk_TradeDays.html">link</a></i></td>
-        <td align="center"><i><a href="MP/HoursWorked/H_MP_HrWk_Days.html">link</a></i></td>
-        <td align="center"><i><a href="MP/HoursWorked/H_MP_HrWk_TotalYOY.html">link</a></i></td>
+        <td><i><a href="CO/HoursWorked/H_CO_HrWk_TradeDays.html">link</a></i></td>
+        <td><i><a href="CO/HoursWorked/H_CO_HrWk_Days.html">link</a></i></td>
+        <td><i><a href="CO/HoursWorked/H_CO_HrWk_TotalYOY.html">link</a></i></td>
       </tr>
       <tr>  
-        <td width = "200" align="right">  Absences  </td> 
-        <td align="center"><i><a href="MP/Absences/H_MP_PdAbs_PlantHW.html">link</a></i></td>
-        <td align="center"><i><a href="MP/Absences/H_MP_PdAbs_NPHW.html">link</a></i></td>
+        <td>  Absences  </td> 
+        <td><i><a href="CO/Absences/H_CO_PdAbs_RetailHrs.html">link</a></i></td>
+        <td><i><a href="CO/Absences/H_CO_PdAbs_RetailInit.html">link</a></i></td>
+        <td><i><a href="CO/Absences/H_CO_PdAbs_Absences.html">link</a></i></td>
+        <td bgcolor="#D3D3D3">	</td>	
+        <td><i><a href="CO/Absences/H_CO_PdAbs_Reorg.html">link</a></i></td>
         <td bgcolor="#D3D3D3">	</td>	
         <td bgcolor="#D3D3D3">	</td>	
-        <td align="center"><i><a href="MP/Absences/H_MP_PdAbs_Reorg.html">link</a></i></td>
-        <td align="center"><i><a href="MP/Absences/H_MP_PdAbs_Absences.html">link</a></i></td>
-        <td bgcolor="#D3D3D3">	</td>	
-        <td bgcolor="#D3D3D3">	</td>	
-        <td bgcolor="#D3D3D3">	</td>	
-        <td align="center"><i><a href="MP/Absences/H_MP_PdAbs_HrsRelated.html">link</a></i></td>
+        <td><i><a href="CO/Absences/H_CO_PdAbs_HrsRelated.html">link</a></i></td>
         <td bgcolor="#D3D3D3">	</td>	
         <td bgcolor="#D3D3D3">	</td>	
         <td bgcolor="#D3D3D3">	</td>	
         <td bgcolor="#D3D3D3">	</td>	
-        <td align="center"><i><a href="MP/Absences/H_MP_PdAbs_TradeDays.html">link</a></i></td>
-        <td align="center"><i><a href="MP/Absences/H_MP_PdAbs_Days.html">link</a></i></td>
-        <td align="center"><i><a href="MP/Absences/H_MP_PdAbs_TotalYOY.html">link</a></i></td>
+        <td><i><a href="CO/Absences/H_CO_PdAbs_TradeDays.html">link</a></i></td>
+        <td><i><a href="CO/Absences/H_CO_PdAbs_Days.html">link</a></i></td>
+        <td><i><a href="CO/Absences/H_CO_PdAbs_TotalYOY.html">link</a></i></td>
       </tr>
       <tr>  
-        <td width = "200" align="right">  Vacation  </td> 
-        <td align="center"><i><a href="MP/Vacation/H_MP_Vac_PlantHW.html">link</a></i></td>
-        <td align="center"><i><a href="MP/Vacation/H_MP_Vac_NPHW.html">link</a></i></td>
+        <td>  Vacation  </td> 
+        <td><i><a href="CO/Vacation/H_CO_Vac_RetailHrs.html">link</a></i></td>
+        <td><i><a href="CO/Vacation/H_CO_Vac_RetailInit.html">link</a></i></td>
+        <td bgcolor="#D3D3D3">	</td>	
+        <td><i><a href="CO/Vacation/H_CO_Vac_Vac.html">link</a></i></td>
+        <td><i><a href="CO/Vacation/H_CO_Vac_Reorg.html">link</a></i></td>
         <td bgcolor="#D3D3D3">	</td>	
         <td bgcolor="#D3D3D3">	</td>	
-        <td align="center"><i><a href="MP/Vacation/H_MP_Vac_Reorg.html">link</a></i></td>
-        <td bgcolor="#D3D3D3">	</td>	
-        <td align="center"><i><a href="MP/Vacation/H_MP_Vac_Vac.html">link</a></i></td>
-        <td bgcolor="#D3D3D3">	</td>	
-        <td bgcolor="#D3D3D3">	</td>	
-        <td align="center"><i><a href="MP/Vacation/H_MP_Vac_HrsRelated.html">link</a></i></td>
+        <td><i><a href="CO/Vacation/H_CO_Vac_HrsRelated.html">link</a></i></td>
         <td bgcolor="#D3D3D3">	</td>	
         <td bgcolor="#D3D3D3">	</td>	
         <td bgcolor="#D3D3D3">	</td>	
         <td bgcolor="#D3D3D3">	</td>	
-        <td align="center"><i><a href="MP/Vacation/H_MP_Vac_TradeDays.html">link</a></i></td>
-        <td align="center"><i><a href="MP/Vacation/H_MP_Vac_Days.html">link</a></i></td>
-        <td align="center"><i><a href="MP/Vacation/H_MP_Vac_TotalYOY.html">link</a></i></td>
+        <td><i><a href="CO/Vacation/H_CO_Vac_TradeDays.html">link</a></i></td>
+        <td><i><a href="CO/Vacation/H_CO_Vac_Days.html">link</a></i></td>
+        <td><i><a href="CO/Vacation/H_CO_Vac_TotalYOY.html">link</a></i></td>
       </tr>
       <tr>  
-        <td width = "200" align="right">  Training & Union Leaves </td> 
-        <td align="center"><i><a href="MP/Training+UnionLeaves/H_MP_Train_PlantHW.html">link</a></i></td>
-        <td align="center"><i><a href="MP/Training+UnionLeaves/H_MP_Train_NPHW.html">link</a></i></td>
+        <td>  Training & Union Leaves </td> 
+        <td><i><a href="CO/Training+UnionLeaves/H_CO_Train_RetailHrs.html">link</a></i></td>
+        <td><i><a href="CO/Training+UnionLeaves/H_CO_Train_RetailInit.html">link</a></i></td>
         <td bgcolor="#D3D3D3">	</td>	
         <td bgcolor="#D3D3D3">	</td>	
-        <td align="center"><i><a href="MP/Training+UnionLeaves/H_MP_Train_Reorg.html">link</a></i></td>
+        <td><i><a href="CO/Training+UnionLeaves/H_CO_Train_Reorg.html">link</a></i></td>
+        <td><i><a href="CO/Training+UnionLeaves/H_CO_Train_Train.html">link</a></i></td>
         <td bgcolor="#D3D3D3">	</td>	
-        <td bgcolor="#D3D3D3">	</td>	
-        <td align="center"><i><a href="MP/Training+UnionLeaves/H_MP_Train_Train.html">link</a></i></td>
-        <td bgcolor="#D3D3D3">	</td>	
-        <td align="center"><i><a href="MP/Training+UnionLeaves/H_MP_Train_HrsRelated.html">link</a></i></td>
+        <td><i><a href="CO/Training+UnionLeaves/H_CO_Train_HrsRelated.html">link</a></i></td>
         <td bgcolor="#D3D3D3">	</td>	
         <td bgcolor="#D3D3D3">	</td>	
         <td bgcolor="#D3D3D3">	</td>	
         <td bgcolor="#D3D3D3">	</td>	
-        <td align="center"><i><a href="MP/Training+UnionLeaves/H_MP_Train_TradeDays.html">link</a></i></td>
-        <td align="center"><i><a href="MP/Training+UnionLeaves/H_MP_Train_Days.html">link</a></i></td>
-        <td align="center"><i><a href="MP/Training+UnionLeaves/H_MP_Train_TotalYOY.html">link</a></i></td>
+        <td><i><a href="CO/Training+UnionLeaves/H_CO_Train_TradeDays.html">link</a></i></td>
+        <td><i><a href="CO/Training+UnionLeaves/H_CO_Train_Days.html">link</a></i></td>
+        <td><i><a href="CO/Training+UnionLeaves/H_CO_Train_TotalYOY.html">link</a></i></td>
       </tr>
       <tr>  
-        <td width = "200" align="right">  Stat  </td> 
-        <td align="center"><i><a href="MP/StatHolidays/H_MP_Stat_PlantHW.html">link</a></i></td>
-        <td align="center"><i><a href="MP/StatHolidays/H_MP_Stat_NPHW.html">link</a></i></td>
+        <td>  Stat Holidays </td> 
+        <td><i><a href="CO/StatHolidays/H_CO_Stat_RetailHrs.html">link</a></i></td>
+        <td><i><a href="CO/StatHolidays/H_CO_Stat_RetailInit.html">link</a></i></td>
         <td bgcolor="#D3D3D3">	</td>	
         <td bgcolor="#D3D3D3">	</td>	
-        <td align="center"><i><a href="MP/StatHolidays/H_MP_Stat_Reorg.html">link</a></i></td>
+        <td><i><a href="CO/StatHolidays/H_CO_Stat_Reorg.html">link</a></i></td>
         <td bgcolor="#D3D3D3">	</td>	
-        <td bgcolor="#D3D3D3">	</td>	
-        <td bgcolor="#D3D3D3">	</td>	
-        <td align="center"><i><a href="MP/StatHolidays/H_MP_Stat_Stat.html">link</a></i></td>
-        <td align="center"><i><a href="MP/StatHolidays/H_MP_Stat_HrsRelated.html">link</a></i></td>
+        <td><i><a href="CO/StatHolidays/H_CO_Stat_Stat.html">link</a></i></td>
+        <td><i><a href="CO/StatHolidays/H_CO_Stat_HrsRelated.html">link</a></i></td>
         <td bgcolor="#D3D3D3">	</td>	
         <td bgcolor="#D3D3D3">	</td>	
         <td bgcolor="#D3D3D3">	</td>	
         <td bgcolor="#D3D3D3">	</td>	
-        <td align="center"><i><a href="MP/StatHolidays/H_MP_Stat_TradeDays.html">link</a></i></td>
-        <td align="center"><i><a href="MP/StatHolidays/H_MP_Stat_Days.html">link</a></i></td>
-        <td align="center"><i><a href="MP/StatHolidays/H_MP_Stat_TotalYOY.html">link</a></i></td>
+        <td><i><a href="CO/StatHolidays/H_CO_Stat_TradeDays.html">link</a></i></td>
+        <td><i><a href="CO/StatHolidays/H_CO_Stat_Days.html">link</a></i></td>
+        <td><i><a href="CO/StatHolidays/H_CO_Stat_TotalYOY.html">link</a></i></td>
       </tr>    
     </TABLE>
   </font>					
-  <br>
-  <br>
-<!--Collection and Delivery Table-->
-<!-- <font face="Arial" size ="3">
-  <b>COLLECTION & DELIVERY</b>
-</font>
-<br>
-<font face="Cambria" size ="2">
-<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0">		
-  <tr>  
-    <td width = "200" align="center"><b>YOY Hours</b></td>
-    <td width = "100" align="center">Volume Count Restructures</td>
-    <td width = "100" align="center">LC Benchmark</td>
-    <td width = "100" align="center">LCA Productivity (Hours Worked)</td>
-    <td width = "100" align="center">LCA Volume / Mix</td>
-    <td width = "100" align="center">MSC Benchmark</td>
-    <td width = "100" align="center">MSC Restructures</td>
-    <td width = "100" align="center">Neighbourhood Mail Prep-Time</td>
-    <td width = "100" align="center">LC POC Growth</td>
-    <td width = "100" align="center">Investments</td>
-    <td width = "100" align="center">Reorg & Coding</td>
-    <td width = "100" align="center">Absences</td>
-    <td width = "100" align="center">Vacation</td>
-    <td width = "100" align="center">Training & Union Leaves</td>
-    <td width = "100" align="center">Stat Holidays</td>
-    <td width = "100" align="center">Total Hours Related</td>
-    <td width = "100" align="center">Residual Rate & Allowances</td>
-    <td width = "100" align="center">Timing - Non Hour related</td>
-    <td width = "100" align="center">Wage Increase</td>
-    <td width = "100" align="center">Total Rate Related</td>
-    <td width = "100" align="center">Trade Days Adj.</td>
-    <td width = "100" align="center">Days Adjustments</td>
-    <td width = "100" align="center">Total YOY</td>
-  </tr>
-  <tr>  
-    <td width = "200" align="right">  Hours Worked  </td> 
-    <td align="center"><i><a href="CD/HoursWorked/H_CD_HrWk_VolRest.html">link</a></i></td>
-    <td align="center"><i><a href="CD/HoursWorked/H_CD_HrWk_LCBench.html">link</a></i></td>
-    <td align="center"><i><a href="CD/HoursWorked/H_CD_HrWk_LCAProd.html">link</a></i></td>
-    <td align="center"></td>
-    <td align="center"><i><a href="CD/HoursWorked/H_CD_HrWk_MSCBench.html">link</a></i></td>
-    <td align="center"><i><a href="CD/HoursWorked/H_CD_HrWk_MSCRest.html">link</a></i></td>
-    <td align="center"><i><a href="CD/HoursWorked/H_CD_HrWk_NeighborMail.html">link</a></i></td>
-    <td align="center"><i><a href="CD/HoursWorked/H_CD_HrWk_LCPOCGro.html">link</a></i></td>
-    <td align="center"><i><a href="CD/HoursWorked/H_CD_HrWk_Invest.html">link</a></i></td>
-    <td align="center"><i><a href="CD/HoursWorked/H_CD_HrWk_Reorg.html">link</a></i></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"><i><a href="CD/HoursWorked/H_CD_HrWk_Days.html">link</a></i></td>
-    <td align="center"></td>
-  </tr>
-  <tr>  
-    <td width = "200" align="right">  Absences  </td> 
-    <td align="center"><i><a href="CD/Absences/H_CD_PdAbs_VolRest.html">link</a></i></td>
-    <td align="center"><i><a href="CD/Absences/H_CD_PdAbs_LCBench.html">link</a></i></td>
-    <td align="center"><i><a href="CD/Absences/H_CD_PdAbs_LCAProd.html">link</a></i></td>
-    <td align="center"></td>
-    <td align="center"><i><a href="CD/Absences/H_CD_PdAbs_MSCBench.html">link</a></i></td>
-    <td align="center"><i><a href="CD/Absences/H_CD_PdAbs_MSCRest.html">link</a></i></td>
-    <td align="center"><i><a href="CD/Absences/H_CD_PdAbs_NeighborMail.html">link</a></i></td>
-    <td align="center"><i><a href="CD/Absences/H_CD_PdAbs_LCPOCGro.html">link</a></i></td>
-    <td align="center"><i><a href="CD/Absences/H_CD_PdAbs_Invest.html">link</a></i></td>
-    <td align="center"><i><a href="CD/Absences/H_CD_PdAbs_Reorg.html">link</a></i></td>
-    <td align="center"><i><a href="CD/Absences/H_CD_PdAbs_Absences.html">link</a></i></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"><i><a href="CD/Absences/H_CD_PdAbs_Days.html">link</a></i></td>
-    <td align="center"></td>
-  </tr>
-  <tr>  
-    <td width = "200" align="right">  Vacation  </td> 
-    <td align="center"><i><a href="CD/Vacation/H_CD_Vac_VolRest.html">link</a></i></td>
-    <td align="center"><i><a href="CD/Vacation/H_CD_Vac_LCBench.html">link</a></i></td>
-    <td align="center"><i><a href="CD/Vacation/H_CD_Vac_LCAProd.html">link</a></i></td>
-    <td align="center"></td>
-    <td align="center"><i><a href="CD/Vacation/H_CD_Vac_MSCBench.html">link</a></i></td>
-    <td align="center"><i><a href="CD/Vacation/H_CD_Vac_MSCRest.html">link</a></i></td>
-    <td align="center"><i><a href="CD/Vacation/H_CD_Vac_NeighborMail.html">link</a></i></td>
-    <td align="center"><i><a href="CD/Vacation/H_CD_Vac_LCPOCGro.html">link</a></i></td>
-    <td align="center"><i><a href="CD/Vacation/H_CD_Vac_Invest.html">link</a></i></td>
-    <td align="center"><i><a href="CD/Vacation/H_CD_Vac_Reorg.html">link</a></i></td>
-    <td align="center"></td>
-    <td align="center"><i><a href="CD/Vacation/H_CD_Vac_Vac.html">link</a></i></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"><i><a href="CD/Vacation/H_CD_Vac_Days.html">link</a></i></td>
-    <td align="center"></td>
-  </tr>
-  <tr>  
-    <td width = "200" align="right">  Training & Union Leaves </td> 
-    <td align="center"><i><a href="CD/Training+UnionLeaves/H_CD_Train_VolRest.html">link</a></i></td>
-    <td align="center"><i><a href="CD/Training+UnionLeaves/H_CD_Train_LCBench.html">link</a></i></td>
-    <td align="center"><i><a href="CD/Training+UnionLeaves/H_CD_Train_LCAProd.html">link</a></i></td>
-    <td align="center"></td>
-    <td align="center"><i><a href="CD/Training+UnionLeaves/H_CD_Train_MSCBench.html">link</a></i></td>
-    <td align="center"><i><a href="CD/Training+UnionLeaves/H_CD_Train_MSCRest.html">link</a></i></td>
-    <td align="center"><i><a href="CD/Training+UnionLeaves/H_CD_Train_NeighborMail.html">link</a></i></td>
-    <td align="center"><i><a href="CD/Training+UnionLeaves/H_CD_Train_LCPOCGro.html">link</a></i></td>
-    <td align="center"><i><a href="CD/Training+UnionLeaves/H_CD_Train_Invest.html">link</a></i></td>
-    <td align="center"><i><a href="CD/Training+UnionLeaves/H_CD_Train_Reorg.html">link</a></i></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"><i><a href="CD/Training+UnionLeaves/H_CD_Train_Train.html">link</a></i></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"><i><a href="CD/Training+UnionLeaves/H_CD_Train_Days.html">link</a></i></td>
-    <td align="center"></td>
-  </tr>
-  <tr>  
-    <td width = "200" align="right">  Stat  </td> 
-    <td align="center"><i><a href="CD/StatHolidays/H_CD_Stat_VolRest.html">link</a></i></td>
-    <td align="center"><i><a href="CD/StatHolidays/H_CD_Stat_LCBench.html">link</a></i></td>
-    <td align="center"><i><a href="CD/StatHolidays/H_CD_Stat_LCAProd.html">link</a></i></td>
-    <td align="center"></td>
-    <td align="center"><i><a href="CD/StatHolidays/H_CD_Stat_MSCBench.html">link</a></i></td>
-    <td align="center"><i><a href="CD/StatHolidays/H_CD_Stat_MSCRest.html">link</a></i></td>
-    <td align="center"><i><a href="CD/StatHolidays/H_CD_Stat_NeighborMail.html">link</a></i></td>
-    <td align="center"><i><a href="CD/StatHolidays/H_CD_Stat_LCPOCGro.html">link</a></i></td>
-    <td align="center"><i><a href="CD/StatHolidays/H_CD_Stat_Invest.html">link</a></i></td>
-    <td align="center"><i><a href="CD/StatHolidays/H_CD_Stat_Reorg.html">link</a></i></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"><i><a href="CD/StatHolidays/H_CD_Stat_Stat.html">link</a></i></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"><i><a href="CD/StatHolidays/H_CD_Stat_Days.html">link</a></i></td>
-    <td align="center"></td>
-  </tr>             
-</TABLE>
-</font>
-
-
-</TABLE></font>					
-<br>
-<br>
-<font face="Arial" size ="3">
-  <b>COUNTER OPERATIONS</b>
-</font>
-<br>
-<font face="Cambria" size ="2">
-<TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0">		
-    <tr>	
-      <td width = "200" align="center"><b>YOY Hours</b></td>
-      <td width = "100" align="center">Retail Hours</td>
-      <td width = "100" align="center">Retail Initiatives</td>
-      <td width = "100" align="center">Absences</td>
-      <td width = "100" align="center">Vacation</td>
-      <td width = "100" align="center">Reorg & Coding</td>
-      <td width = "100" align="center">Training & Union Leaves</td>
-      <td width = "100" align="center">Stat Holidays</td>
-      <td width = "100" align="center">Total Hours Related</td>
-      <td width = "100" align="center">Residual Rate & Allowances</td>
-      <td width = "100" align="center">Timing - Non Hour related</td>
-      <td width = "100" align="center">Wage Increase</td>
-      <td width = "100" align="center">Total Rate Related</td>
-      <td width = "100" align="center">Trade Days Adj.</td>
-      <td width = "100" align="center">Days Adjustments</td>
-      <td width = "100" align="center">Total YOY</td>
-    </tr>
-    <tr>	
-      <td width = "200" align="right">Hours Worked</td>
-      <td width = "100" align="center">	<i><a href="CO/HoursWorked/H_CO_HrWk_RetailHrs.html">link</a>	<br></i>	</td>
-      <td width = "100" align="center">	<i><a href="CO/HoursWorked/H_CO_HrWk_RetailInit.html">link</a>	<br></i>	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center">	<i><a href="CO/HoursWorked/H_CO_HrWk_Reorg.html">link</a>	<br></i>	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center">	<i><a href="CO/HoursWorked/H_CO_HrWk_Days.html">link</a>	<br></i>	</td>
-      <td width = "100" align="center"> 	</td>
-    </tr>
-    <tr>	
-      <td width = "200" align="right">Absences</td>
-      <td width = "100" align="center">	<i><a href="CO/Absences/H_CO_PdAbs_RetailHrs.html">link</a>	<br></i>	</td>
-      <td width = "100" align="center">	<i><a href="CO/Absences/H_CO_PdAbs_RetailInit.html">link</a>	<br></i>	</td>
-      <td width = "100" align="center">	<i><a href="CO/Absences/H_CO_PdAbs_Absences.html">link</a>	<br></i>	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center">	<i><a href="CO/Absences/H_CO_PdAbs_Reorg.html">link</a>	<br></i>	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center">	<i><a href="CO/Absences/H_CO_PdAbs_Days.html">link</a>	<br></i>	</td>
-      <td width = "100" align="center"> 	</td>
-    </tr>
-    <tr>	
-      <td width = "200" align="right">Vacation</td>
-      <td width = "100" align="center">	<i><a href="CO/Vacation/H_CO_Vac_RetailHrs.html">link</a>	<br></i>	</td>
-      <td width = "100" align="center">	<i><a href="CO/Vacation/H_CO_Vac_RetailInit.html">link</a>	<br></i>	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center">	<i><a href="CO/Vacation/H_CO_Vac_Vac.html">link</a>	<br></i>	</td>
-      <td width = "100" align="center">	<i><a href="CO/Vacation/H_CO_Vac_Reorg.html">link</a>	<br></i>	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center">	<i><a href="CO/Vacation/H_CO_Vac_Days.html">link</a>	<br></i>	</td>
-      <td width = "100" align="center"> 	</td>
-    </tr>
-    <tr>	
-      <td width = "200" align="right">Training & Union Leaves</td>
-      <td width = "100" align="center">	<i><a href="CO/Training+UnionLeaves/H_CO_Train_RetailHrs.html">link</a>	<br></i>	</td>
-      <td width = "100" align="center">	<i><a href="CO/Training+UnionLeaves/H_CO_Train_RetailInit.html">link</a>	<br></i>	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center">	<i><a href="CO/Training+UnionLeaves/H_CO_Train_Reorg.html">link</a>	<br></i>	</td>
-      <td width = "100" align="center">	<i><a href="CO/Training+UnionLeaves/H_CO_Train_Train.html">link</a>	<br></i>	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center">	<i><a href="CO/Training+UnionLeaves/H_CO_Train_Days.html">link</a>	<br></i>	</td>
-      <td width = "100" align="center"> 	</td>
-    </tr>
-    <tr>	
-      <td width = "200" align="right">Stat Holidays</td>
-      <td width = "100" align="center">	<i><a href="CO/StatHolidays/H_CO_Stat_RetailHrs.html">link</a>	<br></i>	</td>
-      <td width = "100" align="center">	<i><a href="CO/StatHolidays/H_CO_Stat_RetailInit.html">link</a>	<br></i>	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center">	<i><a href="CO/StatHolidays/H_CO_Stat_Reorg.html">link</a>	<br></i>	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center">	<i><a href="CO/StatHolidays/H_CO_Stat_Stat.html">link</a>	<br></i>	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center"> 	</td>
-      <td width = "100" align="center">	<i><a href="CO/StatHolidays/H_CO_Stat_Days.html">link</a>	<br></i>	</td>
-      <td width = "100" align="center"> 	</td>
-    </tr>
-  </TABLE>
-</font> -->
 </body>																		
 </html>
