@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <ul>
+        <li><b>Direct Labour Model Methodology</b></li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Drivers</a>
+            <div class="dropdown-content">
+                <a href="../../../Driver/Driver_MP.html">Mail processing</a>
+                <a href="../../../Driver/Driver_CD.html">Collection & Delivery</a>
+                <a href="../../../Driver/Driver_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Dollars Matrix</a>
+            <div class="dropdown-content">
+                <a href="../../../Dollars/DollarMatrix_MP.html">Mail processing</a>
+                <a href="../../../DollarMatrix_CD.html">Collection & Delivery</a>
+                <a href="../../../DollarMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Hours Matrix</a>
+            <div class="dropdown-content">
+                <a href="../../../Hours/HourMatrix_MP.html">Mail processing</a>
+                <a href="../../../Hours/HourMatrix_CD.html">Collection & Delivery</a>
+                <a href="../../../Hours/HourMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+          <a href="javascript:void(0)" class="dropbtn">Reference</a>
+          <div class="dropdown-content">
+              <a href="../../../Reference/ActGrp.html">Act Group</a>
+              <a href="../../../Reference/Adjustments.html">Adjustments</a>
+              <a href="../../../Reference/AllocationRates.html">Allocation Rates</a>
+              <a href="../../../Reference/Dollars.html">BW Dollars</a>
+              <a href="../../../Reference/GLCEGrp_Dollars.html">GLCE Group (Dollars)</a>
+              <a href="../../../Reference/GLCEGrp_Hours.html">GLCE Group (Hours)</a>
+              <a href="../../../Reference/Hours.html">BW Hours</a>
+              <a href="../../../Reference/HoursNonHoursSplit.html">Hours v Non Hours Related</a>
+              <a href="../../../Reference/LYPaidRate.html">LY Paid Rate</a>
+              <a href="../../../Reference/Plant_NonPlant.html">Plant v Non Plant</a>
+              <a href="../../../Reference/TimeGroup_Dollars.html">Time Group (Dollars)</a>
+              <a href="../../../Reference/TimeGroup_Hours.html">Time Group (Hours)</a>
+              <a href="../../../Reference/WageIncrease.html">Wage Increase</a>
+          </div>
+      </li>
+    </ul>
+    <link rel="stylesheet" href="../../../style.css" />
+</head>
+<body>
+    <Table class = "style2">
+        <tr class = "style2">
+          <td class = "style3" align = "right"><b>Tab:</b></td>
+          <td class = "style3">Driver</td></tr>
+        <tr class = "style2">
+          <td class = "style3" align = "right"><b>Table:</b></td>
+          <td class = "style3">Counter Operations</td></tr>								
+        <tr class = "style2">
+          <td class = "style3" align = "right"><b>Line Item:</b></td>
+          <td class = "style3">STDP PD Payout / Accrual</td></tr>		
+        <tr class = "style2">
+            <td class = "style3" align = "right"><b>Data Type:</b></td>
+            <td class = "style3">YOY Dollars</td></tr>
+      </Table>														
+    <p class = "eq">
+        <i>Value = <b>	<a href="../../../Reference/Dollars.html">[LY Dollars]</a> 
+            - <a href="../../../Reference/Dollars.html">[TY Dollars]</a> 
+            + <a href="../../../Reference/Adjustments.html">[Adjustments]</a> </b></i>	
+    </p>
+    <TABLE>															
+        <tr>	
+            <td>	<i>Name</i>	</td>	
+            <td>	<i>Fiscal Year</i>	</td>	
+            <td>	<i>GLCE Group</i>	</td>	
+            <td>	<i>Act Group</i>	</td>	
+            <td>	<i>Driver</i>	</td>	
+            <td>  <i>Hours or Non Hours Related</i></td>
+            <td>  <i>Hours or Dollars</i></td>
+        </tr>
+        <tr>	
+            <td>	[TY Dollars]	</td>	
+            <td>  TY	</td>	
+            <td>  STDP </td>	
+            <td>  CO	</td>	
+            <td>  n/a </td>
+            <td>  Non Hours Related </td>
+            <td>  n/a </td>
+        </tr>
+        <tr>	
+            <td>	[LY Dollars]	</td>	
+          <td>  LY	</td>	
+          <td>  STDP	</td>
+          <td>	CO	</td>
+          <td>  n/a </td>	
+          <td>  Non Hours Related </td>
+          <td>  n/a </td>
+        </tr>
+        <tr>	
+            <td>	[Adjustments]	</td>	
+          <td>  TY	</td>	
+          <td>  STDP	</td>
+          <td>	CO	</td>	
+          <td>  All </td>	
+          <td>  n/a </td>
+          <td>  Dollars </td>
+        </tr>
+      </table>								
+      <p>															
+        <b>Further Links:</b>	
+        <br>														
+        <a href="../../../Reference/GLCEGrp_Dollars.html">[GLCE Group]</a>
+        <br>														
+        <a href="../../../Reference/HoursNonHoursSplit.html">[Hours vs Non Hours Split]</a>	
+        <br>
+        <a href="../../../Reference/ActGrp.html">[Act Group]</a>																			
+      </p>															
+</body>	
