@@ -1,48 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <ul>
+        <li><b>Direct Labour Model Methodology</b></li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Drivers</a>
+            <div class="dropdown-content">
+                <a href="../../../Driver/Driver_MP.html">Mail processing</a>
+                <a href="../../../Driver/Driver_CD.html">Collection & Delivery</a>
+                <a href="../../../Driver/Driver_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Dollars Matrix</a>
+            <div class="dropdown-content">
+                <a href="../../DollarMatrix_MP.html">Mail processing</a>
+                <a href="../../DollarMatrix_CD.html">Collection & Delivery</a>
+                <a href="../../DollarMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Hours Matrix</a>
+            <div class="dropdown-content">
+                <a href="../../../Hours/HourMatrix_MP.html">Mail processing</a>
+                <a href="../../../Hours/HourMatrix_CD.html">Collection & Delivery</a>
+                <a href="../../../Hours/HourMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+          <a href="javascript:void(0)" class="dropbtn">Reference</a>
+          <div class="dropdown-content">
+              <a href="../../../Reference/ActGrp.html">Act Group</a>
+              <a href="../../../Reference/Adjustments.html">Adjustments</a>
+              <a href="../../../Reference/AllocationRates.html">Allocation Rates</a>
+              <a href="../../../Reference/Dollars.html">BW Dollars</a>
+              <a href="../../../Reference/GLCEGrp_Dollars.html">GLCE Group (Dollars)</a>
+              <a href="../../../Reference/GLCEGrp_Hours.html">GLCE Group (Hours)</a>
+              <a href="../../../Reference/Hours.html">BW Hours</a>
+              <a href="../../../Reference/HoursNonHoursSplit.html">Hours v Non Hours Related</a>
+              <a href="../../../Reference/LYPaidRate.html">LY Paid Rate</a>
+              <a href="../../../Reference/Plant_NonPlant.html">Plant v Non Plant</a>
+              <a href="../../../Reference/TimeGroup_Dollars.html">Time Group (Dollars)</a>
+              <a href="../../../Reference/TimeGroup_Hours.html">Time Group (Hours)</a>
+              <a href="../../../Reference/WageIncrease.html">Wage Increase</a>
+          </div>
+      </li>
+    </ul>
+    <link rel="stylesheet" href="../../../style.css" />
+</head>
 <body>
-  <font face="Arial" size ="3">															
-    <b>Tab: </b>	GM Matrix	<br>	
-    <b>Table: </b>	Counter Operations	<br>														
-    <b>Data Type: </b>	Dollars	<br>													
-    <b>Row: </b>	Stat Holidays	<br>													
-    <b>Column: </b>	Retail Hours	<br>													
-    <br>
-  </font>															
-  <font face="Times New Roman" size ="4">															
-    <i>Value = <b>	[YOY Hours] * [LY Paid Rate] </b></i>	
-    <br>													
-    <br>
-  </font>														
-  <font face="Arial" size ="3">															
-    <TABLE BORDER="1" CELLPADDING="2" CELLSPACING="0">															
-        <tr>	<td width = "150">	<i>Name</i>	</td>	
-          <td width = "100">	<i>Fiscal Year</i>	</td>	
-          <td width = "100">	<i>Time Group</i>	</td>	
-          <td width = "150">	<i>Act Group</i>	</td>	
-          <td width = "300">	<i>Driver</i>	</td>
-        </tr>
-        <tr>	<td width = "100">	[YOY Hours]	</td>	
-          <td width = "100">  TY	</td>	
-          <td width = "100">  Stat Holidays	</td>	
-          <td width = "100">	CO	</td>	
-          <td width = "100">	Retail Hours	</td>
-        </tr>
-        <tr>	<td width = "100">	[LY Paid Rate]	</td>	
-          <td width = "100">  LY	</td>	
-          <td width = "100">	n/a	</td>	
-          <td width = "100">	CO	</td>	
-          <td width = "100">	n/a	</td>
-        </tr>
-    </table>
-  </font>	
-  <br>
-  <br>																											
-  <font face="Arial" size ="3">															
+    <Table class = "style2">
+        <tr class = "style2">
+          <td class = "style3" align = "right"><b>Tab:</b></td>
+          <td class = "style3">Matrix</td></tr>
+        <tr class = "style2">
+          <td class = "style3" align = "right"><b>Table:</b></td>
+          <td class = "style3">Counter Operations</td></tr>								
+        <tr class = "style2">
+          <td class = "style3" align = "right"><b>Data Type:</b></td>
+          <td class = "style3">Dollars</td></tr>	
+        <tr class = "style2">
+          <td class = "style3" align = "right"><b>Row:</b></td>
+          <td class = "style3">Stat Holidays</td></tr>	
+        <tr class = "style2">
+          <td class = "style3" align = "right"><b>Column:</b></td>
+          <td class = "style3">Retail Hours</td></tr>	
+      </Table>															
+  <p class = "eq">													
+    <i>Value = <b>	<a href="../../../Hours/CO/Absences/H_CO_PdAbs_RetailHrs.html">[YOY Hours]</a> * 
+      <a href="../../../Reference/LYPaidRate.html">[LY Paid Rate]</a></b></i>	
+  </p>																													
+    <TABLE>															
+      <tr>	<td>	<i>Name</i>	</td>	
+        <td>	<i>Fiscal Year</i>	</td>	
+        <td>	<i>Act Group</i>	</td>	
+      </tr>
+      <tr>	<td>	[LY Paid Rate]	</td>	
+        <td>  LY	</td>	
+        <td>	CO	</td>	
+      </tr>
+    </table>								
+  <p>															
     <b>Further Links:</b>	
-    <a href="../../../Hours/CO/StatHolidays/H_CO_Stat_RetailHrs.html">[YOY Hours]</a>	
-    <br>														
-    <a href="../../../Reference/LYPaidRate.html">[LY Paid Rate]</a>	
     <br>
-    <a href="../../GMMatrix_Dollars.html">Back To GM Matrix</a>																						
-  </font>															
-  </body>															
-  
+    <a href="../../../Reference/ActGrp.html">[Act Group]</a>																					
+  </p>															
+</body>															
+</html>
