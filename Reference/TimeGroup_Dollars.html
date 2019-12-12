@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Daniel Gould, 2019, Canada Post -->
 <html>
 <head>
     <ul>
@@ -49,3 +50,164 @@
     <header><b>Time Group (Dollars)</b></header>
     <link rel="stylesheet" href="../style.css" />
 </head>
+<body>
+    <p>
+        For <a href="../Reference/HoursNonHoursSplit.html"> Hours Related</a> <a href="../Reference/Dollars.html">Dollars</a>
+        there is no Time Group (Hr Wk/Vacation/Stat/Train/PdAbs) mapping available. In order to create
+        dollars data comparable to hours (which is mapped to Time Groups) the process below is used to
+        prorate the hours related dollars data based off of the proportions found in the hours data.
+        <br>
+        <br>
+        The dollars data is first mapped to <a href="../Reference/ActGrp.html">Act Groups</a> and 
+        <a href="../Reference/GLCEGrp_Dollars.html">GLCE Groups.</a>
+        <br>
+        <br>
+        Then the proportion of each time group in the hours data is calculated 
+        using this formula:
+    </p>
+    <p class="eq">
+        [Time Group Ratio] = SUMOF[Hours by TimeGroup/ActGroup/GLCEGroup] / SUMOF[Hours by ActGroup/GLCEGroup]
+    </p>
+    <p>
+        This ratio is then multiplied by the dollars data following the formula below:
+    </p>
+    <p class="eq">
+        [Dollars Per Time Group] = [Time Group Ratio] * SUMOF[Dollars by ActGroup/GLCEGroup]
+    </p>
+    <p>
+        To better illustrate this a simple example is provided below.
+    </p>
+    <p>
+        <i><b>Example:</b></i>
+        <br>
+        <i>Single SHN; Single ActGrp (CD)</i>
+    </p>
+    <table>
+        <caption>Hours Data (ActGrp/GLCEGrp/TimeGrp Mapped)</caption>
+        <tr>
+            <td><b>ActGrp</b></td>
+            <td><b>GLCEGrp</b></td>
+            <td><b>TimeGrp</b></td>
+            <td><b>Hours</b></td>
+        </tr>
+        <tr>
+            <td>CD</td>
+            <td>FT</td>
+            <td>Hr Wk</td>
+            <td>1000</td>
+        </tr>
+        <tr>
+            <td>CD</td>
+            <td>PT</td>
+            <td>Hr Wk</td>
+            <td>100</td>
+        </tr>
+        <tr>
+            <td>CD</td>
+            <td>FT</td>
+            <td>Vacation</td>
+            <td>75</td>
+        </tr>
+        <tr>
+            <td>CD</td>
+            <td>PT</td>
+            <td>Vacation</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>CD</td>
+            <td>FT</td>
+            <td>PdAbs</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>CD</td>
+            <td>PT</td>
+            <td>PdAbs</td>
+            <td>10</td>
+        </tr>
+    </table>
+    <table>
+        <caption>Dollars Data (ActGrp/GLCEGrp Mapped)</caption>
+        <tr>
+            <td><b>ActGrp</b></td>
+            <td><b>GLCEGrp</b></td>
+            <td><b>Dollars</b></td>
+        </tr>
+        <tr>
+            <td>CD</td>
+            <td>FT</td>
+            <td>28,125</td>
+        </tr>
+        <tr>
+            <td>CD</td>
+            <td>PT</td>
+            <td>3,250</td>
+        </tr>
+    </table>
+    <p class="eq">
+        <i>Selected Example Calculations:</i>
+        <br>
+        <br>
+        [Hr Wk FT Ratio] = SUMOF[Hours (Hr Wk, FT)] / SUMOF[Hours (FT)] <br>
+        [Hr Wk FT Ratio] = (1000) / (1000 + 75 + 50) <br>
+        [Hr Wk FT Ratio] = 88.9% <br>
+        [Dollars, Hr Wk FT] = SUMOF[Dollars (FT)] * [Hr Wk FT Ratio] <br>
+        [Dollars, Hr Wk FT] = (28,125) * 0.889 <br>
+        [Dollars, Hr Wk FT] = 25,000
+        <br>
+        <br>
+        [Vacation PT Ratio] = SUMOF[Hours (Vacation, PT)] / SUMOF[Hours (PT)] <br>
+        [Vacation PT Ratio] = (20) / (100 + 20 + 10) <br>
+        [Vacation PT Ratio] = 15.4% <br>
+        [Dollars, Vacation FT] = SUMOF[Dollars (PT)] * [Vacation PT Ratio] <br>
+        [Dollars, Vacation FT] = (3,250) * 0.154 <br>
+        [Dollars, Vacation FT] = 500
+    </p>
+    <table>
+        <caption>Final Dollars Data</caption>
+        <tr>
+            <td><b>ActGrp</b></td>
+            <td><b>GLCEGrp</b></td>
+            <td><b>TimeGrp</b></td>
+            <td><b>Dollars</b></td>
+        </tr>
+        <tr>
+            <td>CD</td>
+            <td>FT</td>
+            <td>Hr Wk</td>
+            <td>25,000</td>
+        </tr>
+        <tr>
+            <td>CD</td>
+            <td>PT</td>
+            <td>Hr Wk</td>
+            <td>2,500</td>
+        </tr>
+        <tr>
+            <td>CD</td>
+            <td>FT</td>
+            <td>Vacation</td>
+            <td>1,875</td>
+        </tr>
+        <tr>
+            <td>CD</td>
+            <td>PT</td>
+            <td>Vacation</td>
+            <td>500</td>
+        </tr>
+        <tr>
+            <td>CD</td>
+            <td>FT</td>
+            <td>PdAbs</td>
+            <td>1,250</td>
+        </tr>
+        <tr>
+            <td>CD</td>
+            <td>PT</td>
+            <td>PdAbs</td>
+            <td>250</td>
+        </tr>
+    </table>
+</body>
+</html>

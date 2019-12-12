@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!-- Daniel Gould, 2019, Canada Post -->
+<html>
+<head>
+    <ul>
+        <li><b>Direct Labour Model Methodology</b></li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Drivers</a>
+            <div class="dropdown-content">
+                <a href="Driver/Driver_MP.html">Mail processing</a>
+                <a href="Driver/Driver_CD.html">Collection & Delivery</a>
+                <a href="Driver/Driver_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Dollars Matrix</a>
+            <div class="dropdown-content">
+                <a href="Dollars/DollarMatrix_MP.html">Mail processing</a>
+                <a href="Dollars/DollarMatrix_CD.html">Collection & Delivery</a>
+                <a href="Dollars/DollarMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Hours Matrix</a>
+            <div class="dropdown-content">
+                <a href="Hours/HourMatrix_MP.html">Mail processing</a>
+                <a href="Hours/HourMatrix_CD.html">Collection & Delivery</a>
+                <a href="Hours/HourMatrix_CO.html">Counter Operations</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Reference</a>
+            <div class="dropdown-content">
+                <a href="Reference/ActGrp.html">Act Group</a>
+                <a href="Reference/Adjustments.html">Adjustments</a>
+                <a href="Reference/AllocationRates.html">Allocation Rates</a>
+                <a href="Reference/Dollars.html">BW Dollars</a>
+                <a href="Reference/GLCEGrp_Dollars.html">GLCE Group (Dollars)</a>
+                <a href="Reference/GLCEGrp_Hours.html">GLCE Group (Hours)</a>
+                <a href="Reference/Hours.html">BW Hours</a>
+                <a href="Reference/HoursNonHoursSplit.html">Hours v Non Hours Related</a>
+                <a href="Reference/LYPaidRate.html">LY Paid Rate</a>
+                <a href="Reference/Plant_NonPlant.html">Plant v Non Plant</a>
+                <a href="Reference/TimeGroup_Dollars.html">Time Group (Dollars)</a>
+                <a href="Reference/TimeGroup_Hours.html">Time Group (Hours)</a>
+                <a href="Reference/WageIncrease.html">Wage Increase</a>
+            </div>
+        </li>
+    </ul>
+    <!-- <header><b>CUPW & CPAA Wage Increase</b></header>-->
+    <link rel="stylesheet" href="style.css" /> 
+</head>
+<body>
+    <p>
+        Welcome to the Direct Labour Model (DLM) Methodology Wiki. This document explains the methodology employed by the DLM to calculate 
+        a monthly attribution of drivers in both hours and dollars expensed by VP Operations at the Canada Post Corporation.
+        <br>
+        <br>
+        This document is designed in a similar manner as a website or wiki and allows any user to move through the multi-layered methodology 
+        that the DLM uses. It is set up to be highly navigable and presents information in small parts at a time. 
+        <br>
+        <br>
+        The wiki is separated into four parts, which are in line with how the DLM's results are regularily presented. These are:
+        <br>
+        <a href="Hours/HourMatrix_CD.html">Hours Matrix</a>
+        <br>
+        <a href="Dollars/DollarMatrix_CD.html">Dollars Matrix</a>
+        <br>
+        <a href="Driver/Driver_CD.html">Driver View</a>
+        <br>
+        <a href="Reference/Dollars.html">References</a>
+        <br>
+        <br>
+        These can be selected at any time using the drop down menus above. The Hours and Dollars Matricies and the Driver views are separated 
+        by Act Group (CD/MP/CO). Below is a description of each view.
+    </p>
+    <br>
+    <p>
+        <font size="4">
+            <b>Hours Matrix</b>
+        </font>
+        <br>
+        The Hours Matrix corresponds to the <b>hours</b> portion of the tables found on tabs <i>VP Matrix / GM Matrix</i> and the various <i>Director
+        Matrix</i> in the Direct Labour Report files. Here the data is divided into Drivers (columns) and Activity Types (Rows). 
+        All data is in YOY Hours, with no plan involved.
+    </p>
+    <br>
+    <p>
+        <font size="4">
+            <b>Dollars Matrix</b>
+        </font>
+        <br>
+        The Dollars Matrix corresponds to the <b>dollars</b> portion of the tables found on tabs <i>VP Matrix / GM Matrix</i> and the various <i>Director
+        Matrix</i> in the Direct Labour Report files. Here the data is divided into Drivers (columns) and Activity Types (Rows). 
+        All data is in YOY Hours, with no plan involved. In addition to the Activity Types used in the Hours Matrix, there are additional 
+        Non-Hours Related activities (all data in the DLM is labour-related, but some is not directly tied to a paid hour).
+    </p>
+    <br>
+    <p>
+        <font size="4">
+            <b>Driver View</b>
+        </font>
+        <br>
+        The Driver View corresponds to the <i>ByGM / ByDirector / Driver View</i> tabs in the Direct Labour Report files. Here data is split into 
+        drivers for each Act Group and both the YOY Dollar Variance and Plan Dollar Variance are shown. For the most part the calculation refers 
+        back to the Dollars Matrix, as the same data is effectively just presented in a new format for the Driver View. 
+    </p>
+    <br>
+    <p>
+        <font size="4">
+            <b>References</b>
+        </font>
+        <br>
+        The wiki presents the calculation in a multi-layered manner, with calculations referring other, more basic calculations. The Reference 
+        section of the wiki details the most basic concepts and mappings that are preformed to allow for the calculation to be done. This includes
+        concepts and mapping of the Act Groups and Time Groups, as well as how and where the base data comes from. As the user clicks through the 
+        methodology they will ultimately end up on one of the reference pages, such as the <a href="Reference/Dollars.html">dollars</a> or 
+        <a href="Reference/Hours.html">hours</a> reference pages.
+    </p>
+</body>
+</html>
